@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_amin_petshop_price_history_user,amin.petshop.price.history.user,model_amin_petshop_price_history,base.group_user,1,1,1,1
+access_amin_petshop_import_wizard_user,amin.petshop.import.wizard.user,model_amin_petshop_import_wizard,base.group_user,1,0,1,0
+access_amin_petshop_update_wizard_user,amin.petshop.update.wizard.user,model_amin_petshop_update_wizard,base.group_user,1,0,1,0
+access_product_product_amin_petshop,product.product.amin.petshop,model_product_product,base.group_user,1,1,1,1
+

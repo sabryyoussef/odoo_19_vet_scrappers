@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Category Mapping List View -->
+    <record id="view_category_mapping_list" model="ir.ui.view">
+        <field name="name">unified.category.mapping.list</field>
+        <field name="model">unified.category.mapping</field>
+        <field name="arch" type="xml">
+            <list string="Category Mappings" default_order="data_source_id,sequence">
+                <field name="sequence" widget="handle"/>
+                <field name="data_source_id"/>
+                <field name="external_category_name"/>
+                <field name="external_category_id"/>
+                <field name="odoo_category_id"/>
+                <field name="import_enabled" widget="boolean_toggle"/>
+                <field name="product_count"/>
+                <field name="products_imported"/>
+                <field name="last_sync_date"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Category Mapping Form View -->
+    <record id="view_category_mapping_form" model="ir.ui.view">
+        <field name="name">unified.category.mapping.form</field>
+        <field name="model">unified.category.mapping</field>
+        <field name="arch" type="xml">
+            <form string="Category Mapping">
+                <header>
+                    <button name="action_scrape_and_import" 
+                            string="Scrape &amp; Import" 
+                            type="object" 
+                            class="btn-primary"
+                            icon="fa-cloud-download"
+                            help="Automatically scrape products from category URL and import"/>
+                    <button name="action_import_products" 
+                            string="Import from File" 
+                            type="object" 
+                            class="btn-secondary"
+                            icon="fa-upload"
+                            help="Upload a file and import products from this category"/>
+                    <button name="action_create_odoo_category" 
+                            string="Create Odoo Category" 
+                            type="object" 
+                            class="btn-secondary"
+                            icon="fa-plus"
+                            invisible="odoo_category_id"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_products" 
+                                type="object" 
+                                class="oe_stat_button" 
+                                icon="fa-cubes">
+                            <field name="products_imported" widget="statinfo" string="Products"/>
+                        </button>
+                    </div>
+                    
+                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
+                    
+                    <div class="oe_title">
+                        <label for="external_category_name"/>
+                        <h1><field name="external_category_name" placeholder="e.g., Dog Food"/></h1>
+                    </div>
+                    
+                    <group>
+                        <group string="External Category">
+                            <field name="data_source_id"/>
+                            <field name="external_category_id"/>
+                            <field name="external_category_url" widget="url"/>
+                            <field name="external_parent_id"/>
+                            <field name="sequence"/>
+                            <field name="active"/>
+                        </group>
+                        <group string="Odoo Mapping">
+                            <field name="odoo_category_id"/>
+                            <field name="auto_create_category"/>
+                            <field name="import_enabled"/>
+                        </group>
+                    </group>
+                    
+                    <group>
+                        <group string="Statistics">
+                            <field name="product_count" readonly="1"/>
+                            <field name="products_imported" readonly="1"/>
+                            <field name="last_sync_date" readonly="1"/>
+                        </group>
+                        <group string="Notes">
+                            <field name="notes" nolabel="1" placeholder="Additional notes about this category..."/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Category Mapping Search View -->
+    <record id="view_category_mapping_search" model="ir.ui.view">
+        <field name="name">unified.category.mapping.search</field>
+        <field name="model">unified.category.mapping</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="external_category_name"/>
+                <field name="external_category_id"/>
+                <field name="data_source_id"/>
+                <field name="odoo_category_id"/>
+                
+                <filter name="import_enabled" string="Import Enabled" domain="[('import_enabled', '=', True)]"/>
+                <filter name="not_mapped" string="Not Mapped" domain="[('odoo_category_id', '=', False)]"/>
+                <filter name="mapped" string="Mapped" domain="[('odoo_category_id', '!=', False)]"/>
+                <separator/>
+                <filter name="active" string="Active" domain="[('active', '=', True)]"/>
+                <filter name="archived" string="Archived" domain="[('active', '=', False)]"/>
+                
+                <group name="groupby">
+                    <filter name="group_source" string="Data Source" context="{'group_by': 'data_source_id'}"/>
+                    <filter name="group_odoo_category" string="Odoo Category" context="{'group_by': 'odoo_category_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Category Mapping Action -->
+    <record id="action_category_mapping" model="ir.actions.act_window">
+        <field name="name">Category Mappings</field>
+        <field name="res_model">unified.category.mapping</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_import_enabled': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first category mapping!
+            </p>
+            <p>
+                Map external categories to Odoo product categories to organize imports.
+            </p>
+        </field>
+    </record>
+</odoo>

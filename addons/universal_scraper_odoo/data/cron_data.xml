@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Cron Job for Scheduled Scraping -->
+    <record id="ir_cron_run_scheduled_scrapers" model="ir.cron">
+        <field name="name">Universal Scraper: Run Scheduled Scrapers</field>
+        <field name="model_id" ref="model_scraper_config"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_run_scheduled_scrapers()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">hours</field>
+        <field name="active" eval="True"/>
+    </record>
+</odoo>

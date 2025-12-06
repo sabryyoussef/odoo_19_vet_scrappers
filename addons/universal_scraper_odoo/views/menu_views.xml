@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Root Menu -->
+    <menuitem id="menu_universal_scraper_root"
+              name="Web Scraper"
+              sequence="15"
+              web_icon="universal_scraper_odoo,static/description/icon.png"/>
+
+    <!-- Configuration Menu -->
+    <menuitem id="menu_universal_scraper_configuration"
+              name="Configuration"
+              parent="menu_universal_scraper_root"
+              sequence="10"/>
+
+    <menuitem id="menu_scraper_configs"
+              name="Scraper Configurations"
+              parent="menu_universal_scraper_configuration"
+              action="action_scraper_config"
+              sequence="10"/>
+
+    <!-- Operations Menu -->
+    <menuitem id="menu_universal_scraper_operations"
+              name="Operations"
+              parent="menu_universal_scraper_root"
+              sequence="20"/>
+
+    <menuitem id="menu_quick_scrape"
+              name="Quick Scrape"
+              parent="menu_universal_scraper_operations"
+              action="action_scraper_wizard"
+              sequence="5"/>
+
+    <menuitem id="menu_scraped_products"
+              name="Scraped Products"
+              parent="menu_universal_scraper_operations"
+              action="action_scraped_product_draft"
+              sequence="10"/>
+
+    <menuitem id="menu_scraper_jobs"
+              name="Scraping Jobs"
+              parent="menu_universal_scraper_operations"
+              action="action_scraper_job"
+              sequence="20"/>
+
+    <!-- Link to Unified Scrapper -->
+    <menuitem id="menu_universal_scraper_unified"
+              name="Unified Scrapper"
+              parent="menu_universal_scraper_root"
+              sequence="30"/>
+
+    <menuitem id="menu_unified_data_sources_link"
+              name="Data Sources"
+              parent="menu_universal_scraper_unified"
+              action="unified_scrapper.action_unified_data_source"
+              sequence="10"/>
+
+    <menuitem id="menu_unified_import_wizard_link"
+              name="Import Products"
+              parent="menu_universal_scraper_unified"
+              action="unified_scrapper.action_unified_import_wizard"
+              sequence="20"/>
+
+    <menuitem id="menu_unified_vendor_prices_link"
+              name="Vendor Prices"
+              parent="menu_universal_scraper_unified"
+              action="unified_scrapper.action_unified_vendor_price"
+              sequence="30"/>
+</odoo>

@@ -1,0 +1,7 @@
+name,default_code,list_price,external_product_id,external_url,availability,vendor_name,description
+Royal Canin Dog Food 15kg,RC-DOG-15,850,VET-12345,https://vetution.com/product/rc-dog-15,in_stock,Vetution Store,"Premium dog food for adult dogs"
+Pedigree Adult 10kg,PED-ADULT-10,420,VET-12346,https://vetution.com/product/ped-adult-10,in_stock,Vetution Store,"Complete nutrition for adult dogs"
+Whiskas Cat Food 7kg,WHIS-CAT-7,380,VET-12347,https://vetution.com/product/whiskas-cat-7,in_stock,Vetution Store,"Delicious cat food with real fish"
+Hills Science Diet 12kg,HILLS-SCI-12,950,VET-12348,https://vetution.com/product/hills-science-12,limited,Vetution Store,"Veterinary recommended dog food"
+Purina Pro Plan 15kg,PURINA-PP-15,780,VET-12349,https://vetution.com/product/purina-pp-15,in_stock,Vetution Store,"High protein formula for active dogs"
+

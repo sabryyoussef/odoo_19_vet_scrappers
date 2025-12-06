@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Scraper Job List View -->
+    <record id="view_scraper_job_list" model="ir.ui.view">
+        <field name="name">scraper.job.list</field>
+        <field name="model">scraper.job</field>
+        <field name="arch" type="xml">
+            <list string="Scraping Jobs">
+                <field name="display_name"/>
+                <field name="config_id"/>
+                <field name="start_time"/>
+                <field name="end_time"/>
+                <field name="duration" widget="float_time"/>
+                <field name="status" decoration-success="status == 'success'"
+                                     decoration-danger="status == 'failed'"
+                                     decoration-warning="status == 'partial'"
+                                     decoration-info="status == 'running'"
+                                     widget="badge"/>
+                <field name="products_scraped"/>
+                <field name="products_failed" optional="hide"/>
+                <field name="draft_count"/>
+                <field name="execution_type" optional="hide"/>
+                <button name="action_view_drafts" type="object" icon="fa-list" string="View Drafts"/>
+                <button name="action_rerun" type="object" icon="fa-refresh" string="Rerun"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Scraper Job Form View -->
+    <record id="view_scraper_job_form" model="ir.ui.view">
+        <field name="name">scraper.job.form</field>
+        <field name="model">scraper.job</field>
+        <field name="arch" type="xml">
+            <form string="Scraping Job">
+                <header>
+                    <button name="action_rerun" string="Rerun Scraper" type="object" class="oe_highlight" icon="fa-refresh"/>
+                    <field name="status" widget="statusbar" statusbar_visible="pending,running,success"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_drafts" type="object" class="oe_stat_button" icon="fa-file-text-o">
+                            <field name="draft_count" widget="statinfo" string="Drafts"/>
+                        </button>
+                    </div>
+                    
+                    <div class="oe_title">
+                        <label for="display_name" string="Job"/>
+                        <h1>
+                            <field name="display_name"/>
+                        </h1>
+                    </div>
+                    
+                    <group>
+                        <group string="Configuration">
+                            <field name="config_id"/>
+                            <field name="execution_type"/>
+                        </group>
+                        <group string="Timing">
+                            <field name="start_time"/>
+                            <field name="end_time"/>
+                            <field name="duration" widget="float_time"/>
+                        </group>
+                    </group>
+                    
+                    <group>
+                        <group string="Results">
+                            <field name="products_scraped"/>
+                            <field name="products_failed"/>
+                            <field name="pages_scraped"/>
+                        </group>
+                        <group>
+                            <!-- Empty group for layout -->
+                        </group>
+                    </group>
+                    
+                    <notebook>
+                        <page string="Execution Log" name="log">
+                            <field name="log" widget="text"/>
+                        </page>
+                        
+                        <page string="Error Log" name="error_log" invisible="not error_log">
+                            <field name="error_log" widget="text"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Scraper Job Search View -->
+    <record id="view_scraper_job_search" model="ir.ui.view">
+        <field name="name">scraper.job.search</field>
+        <field name="model">scraper.job</field>
+        <field name="arch" type="xml">
+            <search string="Scraping Jobs">
+                <field name="config_id"/>
+                <field name="display_name"/>
+                <separator/>
+                <filter name="running" string="Running" domain="[('status', '=', 'running')]"/>
+                <filter name="success" string="Success" domain="[('status', '=', 'success')]"/>
+                <filter name="failed" string="Failed" domain="[('status', '=', 'failed')]"/>
+                <separator/>
+                <filter name="manual" string="Manual" domain="[('execution_type', '=', 'manual')]"/>
+                <filter name="scheduled" string="Scheduled" domain="[('execution_type', '=', 'scheduled')]"/>
+                <group name="groupby">
+                    <filter name="group_config" string="Configuration" context="{'group_by': 'config_id'}"/>
+                    <filter name="group_status" string="Status" context="{'group_by': 'status'}"/>
+                    <filter name="group_type" string="Execution Type" context="{'group_by': 'execution_type'}"/>
+                    <filter name="group_date" string="Start Date" context="{'group_by': 'start_time:day'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_scraper_job" model="ir.actions.act_window">
+        <field name="name">Scraping Jobs</field>
+        <field name="res_model">scraper.job</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No scraping jobs yet
+            </p>
+            <p>
+                Scraping jobs will appear here after you run a scraper configuration.
+            </p>
+        </field>
+    </record>
+</odoo>

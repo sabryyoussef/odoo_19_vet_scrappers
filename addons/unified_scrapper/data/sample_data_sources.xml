@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Sample Data Sources for Common E-commerce Sites -->
+    
+    <!-- Vetution Data Source -->
+    <record id="data_source_vetution" model="unified.data.source">
+        <field name="name">Vetution</field>
+        <field name="source_system">vetution</field>
+        <field name="source_type">json</field>
+        <field name="source_url">https://vetution.com</field>
+        <field name="description">Vetution - Veterinary products and pet supplies (uses JavaScript popup login)</field>
+        <field name="authentication_type">web_login</field>
+        <field name="login_method">browser</field>
+        <field name="active" eval="True"/>
+        <field name="sequence">10</field>
+    </record>
+    
+    <!-- Amin Petshop Data Source -->
+    <record id="data_source_amin_petshop" model="unified.data.source">
+        <field name="name">Amin Petshop</field>
+        <field name="source_system">amin_petshop</field>
+        <field name="source_type">json</field>
+        <field name="source_url">https://aminpetshop.com</field>
+        <field name="description">Amin Petshop - Pet products and accessories (requires CAPTCHA, use cookie import)</field>
+        <field name="authentication_type">web_login</field>
+        <field name="login_method">browser</field>
+        <field name="active" eval="True"/>
+        <field name="sequence">20</field>
+    </record>
+    
+    <!-- Amazon Data Source -->
+    <record id="data_source_amazon" model="unified.data.source">
+        <field name="name">Amazon</field>
+        <field name="source_system">amazon</field>
+        <field name="source_type">json</field>
+        <field name="source_url">https://amazon.com</field>
+        <field name="description">Amazon - Global marketplace</field>
+        <field name="active" eval="True"/>
+        <field name="sequence">30</field>
+    </record>
+    
+    <!-- Generic/Other Data Source -->
+    <record id="data_source_generic" model="unified.data.source">
+        <field name="name">Generic E-commerce</field>
+        <field name="source_system">other</field>
+        <field name="source_type">json</field>
+        <field name="source_url">https://example.com/products.json</field>
+        <field name="description">Generic data source template for other e-commerce sites (update URL as needed)</field>
+        <field name="active" eval="False"/>
+        <field name="sequence">100</field>
+    </record>
+</odoo>

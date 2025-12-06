@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_vetution_vendor_price_user,vetution.vendor.price.user,model_vetution_vendor_price,base.group_user,1,1,1,1
+access_vetution_import_wizard_user,vetution.import.product.data.user,model_vetution_import_product_data,base.group_user,1,1,1,0
+

@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Product Template Form View -->
+    <record id="view_product_template_form_vetution" model="ir.ui.view">
+        <field name="name">product.template.form.vetution</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Vetution Data" name="vetution_data">
+                    <!-- Quick Actions & Links -->
+                    <group>
+                        <group>
+                            <button name="action_open_vetution_link" 
+                                    string="Go to Vetution" 
+                                    type="object" 
+                                    class="btn-primary"
+                                    icon="fa-external-link"
+                                    invisible="not product_variant_ids.vetution_link_computed"/>
+                            <field name="vetution_link" string="Stored Link (Raw)" readonly="1" invisible="1"/>
+                        </group>
+                    </group>
+                    
+                    <!-- Basic Information -->
+                    <group string="Basic Information">
+                        <group>
+                            <field name="vetution_brand"/>
+                            <field name="vetution_brand_link" widget="url"/>
+                            <field name="vetution_image_url" widget="url"/>
+                            <button name="action_update_image_from_url" 
+                                    string="Update Product Image from URL" 
+                                    type="object" 
+                                    class="btn-secondary"
+                                    icon="fa-image"
+                                    invisible="not product_variant_ids.vetution_image_url"/>
+                        </group>
+                        <group>
+                            <field name="vetution_review_count"/>
+                            <field name="vetution_total_reviews"/>
+                            <field name="vetution_rating"/>
+                        </group>
+                    </group>
+                    
+                    <!-- Product Attributes -->
+                    <group string="Product Attributes">
+                        <group>
+                            <field name="vetution_ingredients" widget="text"/>
+                            <field name="vetution_sizes" widget="text"/>
+                        </group>
+                        <group>
+                            <field name="vetution_tags" widget="text"/>
+                            <field name="vetution_species" widget="text"/>
+                        </group>
+                    </group>
+                    
+                    <!-- Pricing Information -->
+                    <group string="Pricing Information">
+                        <group>
+                            <field name="vetution_price"/>
+                            <field name="vetution_currency"/>
+                            <field name="vetution_min_price"/>
+                            <field name="vetution_max_price"/>
+                        </group>
+                    </group>
+                    
+                    <!-- Vendor Prices -->
+                    <group string="Vendor Prices">
+                        <field name="vetution_vendor_price_ids" nolabel="1" context="{'default_product_id': product_variant_ids[0].id if product_variant_ids else False}">
+                            <list>
+                                <field name="vendor_name"/>
+                                <field name="price"/>
+                                <field name="currency"/>
+                                <field name="expiration_date"/>
+                                <field name="available" widget="boolean_toggle"/>
+                            </list>
+                        </field>
+                    </group>
+                    
+                    <!-- Delivery & Storage -->
+                    <group string="Delivery &amp; Storage">
+                        <group>
+                            <field name="vetution_express_delivery"/>
+                            <field name="vetution_cold_chain"/>
+                        </group>
+                        <group>
+                            <field name="vetution_whatsapp_contact" widget="url"/>
+                        </group>
+                    </group>
+                    
+                    <!-- Product Details -->
+                    <notebook>
+                        <page string="Product Details">
+                            <group>
+                                <group string="Composition &amp; Presentation">
+                                    <field name="vetution_composition" widget="text"/>
+                                    <field name="vetution_presentation" widget="text"/>
+                                </group>
+                                <group string="Usage Information">
+                                    <field name="vetution_indications" widget="text"/>
+                                    <field name="vetution_dose_administration" widget="text"/>
+                                </group>
+                            </group>
+                            <group>
+                                <group string="Safety Information">
+                                    <field name="vetution_precautions" widget="text"/>
+                                    <field name="vetution_contraindications" widget="text"/>
+                                    <field name="vetution_warnings" widget="text"/>
+                                    <field name="vetution_side_effects" widget="text"/>
+                                </group>
+                                <group string="Additional Information">
+                                    <field name="vetution_pregnancy" widget="text"/>
+                                    <field name="vetution_interactions" widget="text"/>
+                                    <field name="vetution_overdose" widget="text"/>
+                                    <field name="vetution_storage" widget="text"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Shipping &amp; Policies">
+                            <group>
+                                <group>
+                                    <field name="vetution_policy_ordering_shipping" widget="text"/>
+                                    <field name="vetution_delivery" widget="text"/>
+                                    <field name="vetution_return" widget="text"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Product Variant Form View -->
+    <record id="view_product_form_vetution" model="ir.ui.view">
+        <field name="name">product.product.form.vetution</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Vetution Data" name="vetution_data">
+                    <!-- Quick Actions & Links -->
+                    <group>
+                        <group>
+                            <button name="action_open_vetution_link" 
+                                    string="Go to Vetution" 
+                                    type="object" 
+                                    class="btn-primary"
+                                    icon="fa-external-link"
+                                    invisible="not vetution_link_computed"/>
+                            <field name="vetution_link" string="Stored Link (Raw)" readonly="1" invisible="1"/>
+                        </group>
+                    </group>
+                    
+                    <!-- Basic Information -->
+                    <group string="Basic Information">
+                        <group>
+                            <field name="vetution_brand"/>
+                            <field name="vetution_brand_link" widget="url"/>
+                            <field name="vetution_image_url" widget="url"/>
+                            <button name="action_update_image_from_url" 
+                                    string="Update Product Image from URL" 
+                                    type="object" 
+                                    class="btn-secondary"
+                                    icon="fa-image"
+                                    invisible="not vetution_image_url"/>
+                        </group>
+                        <group>
+                            <field name="vetution_review_count"/>
+                            <field name="vetution_total_reviews"/>
+                            <field name="vetution_rating"/>
+                        </group>
+                    </group>
+                    
+                    <!-- Product Attributes -->
+                    <group string="Product Attributes">
+                        <group>
+                            <field name="vetution_ingredients" widget="text"/>
+                            <field name="vetution_sizes" widget="text"/>
+                        </group>
+                        <group>
+                            <field name="vetution_tags" widget="text"/>
+                            <field name="vetution_species" widget="text"/>
+                        </group>
+                    </group>
+                    
+                    <!-- Pricing Information -->
+                    <group string="Pricing Information">
+                        <group>
+                            <field name="vetution_price"/>
+                            <field name="vetution_currency"/>
+                            <field name="vetution_min_price"/>
+                            <field name="vetution_max_price"/>
+                        </group>
+                    </group>
+                    
+                    <!-- Vendor Prices -->
+                    <group string="Vendor Prices">
+                        <field name="vetution_vendor_price_ids" nolabel="1" context="{'default_product_id': id}">
+                            <list>
+                                <field name="vendor_name"/>
+                                <field name="price"/>
+                                <field name="currency"/>
+                                <field name="expiration_date"/>
+                                <field name="available" widget="boolean_toggle"/>
+                            </list>
+                        </field>
+                    </group>
+                    
+                    <!-- Delivery & Storage -->
+                    <group string="Delivery &amp; Storage">
+                        <group>
+                            <field name="vetution_express_delivery"/>
+                            <field name="vetution_cold_chain"/>
+                        </group>
+                        <group>
+                            <field name="vetution_whatsapp_contact" widget="url"/>
+                        </group>
+                    </group>
+                    
+                    <!-- Product Details -->
+                    <notebook>
+                        <page string="Product Details">
+                            <group>
+                                <group string="Composition &amp; Presentation">
+                                    <field name="vetution_composition" widget="text"/>
+                                    <field name="vetution_presentation" widget="text"/>
+                                </group>
+                                <group string="Usage Information">
+                                    <field name="vetution_indications" widget="text"/>
+                                    <field name="vetution_dose_administration" widget="text"/>
+                                </group>
+                            </group>
+                            <group>
+                                <group string="Safety Information">
+                                    <field name="vetution_precautions" widget="text"/>
+                                    <field name="vetution_contraindications" widget="text"/>
+                                    <field name="vetution_warnings" widget="text"/>
+                                    <field name="vetution_side_effects" widget="text"/>
+                                </group>
+                                <group string="Additional Information">
+                                    <field name="vetution_pregnancy" widget="text"/>
+                                    <field name="vetution_interactions" widget="text"/>
+                                    <field name="vetution_overdose" widget="text"/>
+                                    <field name="vetution_storage" widget="text"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Shipping &amp; Policies">
+                            <group>
+                                <group>
+                                    <field name="vetution_policy_ordering_shipping" widget="text"/>
+                                    <field name="vetution_delivery" widget="text"/>
+                                    <field name="vetution_return" widget="text"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </page>
+            </xpath>
+            <xpath expr="//field[@name='default_code']" position="after">
+                <field name="vetution_brand" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_product_tree_vetution" model="ir.ui.view">
+        <field name="name">product.product.tree.vetution</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_product_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='default_code']" position="after">
+                <field name="vetution_brand" optional="show"/>
+                <field name="vetution_price" optional="show"/>
+                <field name="vetution_average_price" optional="show" string="Avg Vetution Price"/>
+                <field name="is_vetution_product" optional="show" widget="boolean_toggle" string="Vetution"/>
+                <field name="vetution_express_delivery" optional="show" widget="boolean_toggle"/>
+                <field name="vetution_cold_chain" optional="show" widget="boolean_toggle"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_product_search_vetution" model="ir.ui.view">
+        <field name="name">product.product.search.vetution</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_search_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='filter_to_sell']" position="after">
+                <separator/>
+                <filter string="Vetution Products" name="vetution_products" domain="[('is_vetution_product', '=', True)]"/>
+                <filter string="Express Delivery" name="express_delivery" domain="[('vetution_express_delivery', '=', True)]"/>
+                <filter string="Cold Chain" name="cold_chain" domain="[('vetution_cold_chain', '=', True)]"/>
+            </xpath>
+            <xpath expr="//search" position="inside">
+                <field name="vetution_brand" string="Brand"/>
+                <field name="vetution_species" string="Species"/>
+                <field name="is_vetution_product" string="Vetution Product"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Root Menu -->
+    <menuitem id="menu_unified_scrapper_root"
+              name="Unified Scrapper"
+              sequence="100"
+              web_icon="unified_scrapper,static/description/icon.png"/>
+
+    <!-- Configuration Menu -->
+    <menuitem id="menu_unified_scrapper_configuration"
+              name="Configuration"
+              parent="menu_unified_scrapper_root"
+              sequence="10"/>
+
+    <menuitem id="menu_unified_data_source"
+              name="Data Sources"
+              parent="menu_unified_scrapper_configuration"
+              action="action_unified_data_source"
+              sequence="10"/>
+
+    <menuitem id="menu_unified_field_mapping"
+              name="Field Mappings"
+              parent="menu_unified_scrapper_configuration"
+              action="action_unified_field_mapping"
+              sequence="20"/>
+
+    <menuitem id="menu_category_mapping"
+              name="Category Mappings"
+              parent="menu_unified_scrapper_configuration"
+              action="action_category_mapping"
+              sequence="30"/>
+
+    <!-- Operations Menu -->
+    <menuitem id="menu_unified_scrapper_operations"
+              name="Operations"
+              parent="menu_unified_scrapper_root"
+              sequence="20"/>
+
+    <menuitem id="menu_import_wizard"
+              name="Import Products"
+              parent="menu_unified_scrapper_operations"
+              action="action_unified_import_wizard"
+              sequence="5"/>
+
+    <menuitem id="menu_unified_import_history"
+              name="Import History"
+              parent="menu_unified_scrapper_operations"
+              action="action_unified_import_history"
+              sequence="10"/>
+
+    <!-- Products Menu -->
+    <menuitem id="menu_unified_scrapper_products"
+              name="Products"
+              parent="menu_unified_scrapper_root"
+              sequence="30"/>
+
+    <!-- Products by Source Submenus -->
+    <record id="action_product_vetution" model="ir.actions.act_window">
+        <field name="name">Vetution Products</field>
+        <field name="res_model">product.template</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_vetution': 1}</field>
+        <field name="domain">[('external_source', '=', 'vetution')]</field>
+    </record>
+
+    <record id="action_product_amin_petshop" model="ir.actions.act_window">
+        <field name="name">Amin Petshop Products</field>
+        <field name="res_model">product.template</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_amin_petshop': 1}</field>
+        <field name="domain">[('external_source', '=', 'amin_petshop')]</field>
+    </record>
+
+    <record id="action_product_amazon" model="ir.actions.act_window">
+        <field name="name">Amazon Products</field>
+        <field name="res_model">product.template</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_amazon': 1}</field>
+        <field name="domain">[('external_source', '=', 'amazon')]</field>
+    </record>
+
+    <record id="action_product_external_all" model="ir.actions.act_window">
+        <field name="name">All External Products</field>
+        <field name="res_model">product.template</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_external_products': 1}</field>
+        <field name="domain">[('external_source', '!=', False), ('external_source', '!=', 'manual')]</field>
+    </record>
+
+    <record id="action_product_sync_errors" model="ir.actions.act_window">
+        <field name="name">Products with Sync Errors</field>
+        <field name="res_model">product.template</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_sync_errors': 1}</field>
+        <field name="domain">[('external_sync_status', '=', 'error')]</field>
+    </record>
+
+    <menuitem id="menu_product_external_all"
+              name="All External Products"
+              parent="menu_unified_scrapper_products"
+              action="action_product_external_all"
+              sequence="10"/>
+
+    <menuitem id="menu_product_vetution"
+              name="Vetution Products"
+              parent="menu_unified_scrapper_products"
+              action="action_product_vetution"
+              sequence="20"/>
+
+    <menuitem id="menu_product_amin_petshop"
+              name="Amin Petshop Products"
+              parent="menu_unified_scrapper_products"
+              action="action_product_amin_petshop"
+              sequence="30"/>
+
+    <menuitem id="menu_product_amazon"
+              name="Amazon Products"
+              parent="menu_unified_scrapper_products"
+              action="action_product_amazon"
+              sequence="40"/>
+
+    <menuitem id="menu_product_sync_errors"
+              name="Sync Errors"
+              parent="menu_unified_scrapper_products"
+              action="action_product_sync_errors"
+              sequence="50"/>
+    
+    <menuitem id="menu_vendor_prices"
+              name="Vendor Prices"
+              parent="menu_unified_scrapper_products"
+              action="action_unified_vendor_price"
+              sequence="60"/>
+</odoo>

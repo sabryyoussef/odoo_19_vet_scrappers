@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Product Template Form Extension -->
+    <record id="view_product_template_form_inherit_unified" model="ir.ui.view">
+        <field name="name">product.template.form.inherit.unified</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="External Source" name="external_source" invisible="not external_source">
+                    <!-- Quick Actions -->
+                    <div class="alert alert-info" role="alert" invisible="not external_source or external_source == 'manual'">
+                        <strong>External Product:</strong> This product is imported from 
+                        <field name="external_source" readonly="1" class="fw-bold"/>
+                    </div>
+                    
+                    <group>
+                        <group>
+                            <button name="action_open_external_link" 
+                                    string="Open External Link" 
+                                    type="object" 
+                                    class="btn-primary"
+                                    icon="fa-external-link"
+                                    invisible="not external_product_url"/>
+                            <button name="action_sync_from_source" 
+                                    string="Sync from Source" 
+                                    type="object" 
+                                    class="btn-success"
+                                    icon="fa-refresh"
+                                    invisible="external_source == 'manual'"/>
+                            <button name="action_view_sync_history" 
+                                    string="View Sync History" 
+                                    type="object" 
+                                    class="btn-secondary"
+                                    icon="fa-history"
+                                    invisible="external_source == 'manual'"/>
+                            <button name="action_clear_sync_error" 
+                                    string="Clear Error" 
+                                    type="object" 
+                                    class="btn-warning"
+                                    icon="fa-eraser"
+                                    invisible="external_sync_status != 'error'"/>
+                        </group>
+                    </group>
+                    
+                    <!-- External Source Information -->
+                    <group string="Source Information">
+                        <group>
+                            <field name="external_source" readonly="1"/>
+                            <field name="external_product_id" readonly="1"/>
+                            <field name="external_product_url" widget="url" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="external_import_date" readonly="1"/>
+                            <field name="external_update_count" readonly="1"/>
+                        </group>
+                    </group>
+                    
+                    <!-- Sync Status -->
+                    <group string="Sync Status">
+                        <group>
+                            <field name="external_sync_status" readonly="1"
+                                   decoration-success="external_sync_status == 'synced'"
+                                   decoration-danger="external_sync_status == 'error'"
+                                   decoration-warning="external_sync_status == 'pending'"/>
+                            <field name="external_last_sync" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="external_sync_error" 
+                                   widget="text" 
+                                   readonly="1"
+                                   invisible="not external_sync_error"/>
+                        </group>
+                    </group>
+                </page>
+                
+                <!-- Vendor Prices Tab -->
+                <page string="Vendor Prices" name="vendor_prices" invisible="vendor_price_count == 0">
+                    <div class="alert alert-success" role="alert" invisible="vendor_price_count == 0">
+                        <strong>Multi-Source Product:</strong> This product is available from 
+                        <field name="vendor_price_count" readonly="1" class="fw-bold"/> vendor(s).
+                        <span invisible="lowest_vendor_price == 0">
+                            Prices range from <field name="lowest_vendor_price" readonly="1" class="fw-bold"/> 
+                            to <field name="highest_vendor_price" readonly="1" class="fw-bold"/>.
+                        </span>
+                    </div>
+                    
+                    <group>
+                        <group string="Price Statistics">
+                            <field name="lowest_vendor_price" readonly="1"/>
+                            <field name="highest_vendor_price" readonly="1"/>
+                            <field name="average_vendor_price" readonly="1"/>
+                        </group>
+                        <group>
+                            <button name="action_view_vendor_prices" 
+                                    string="View All Vendor Prices" 
+                                    type="object" 
+                                    class="btn-primary"
+                                    icon="fa-list"/>
+                        </group>
+                    </group>
+                    
+                    <field name="vendor_price_ids" nolabel="1">
+                        <list editable="bottom" default_order="price asc">
+                            <field name="source"/>
+                            <field name="vendor_name"/>
+                            <field name="price" decoration-success="is_lowest" decoration-danger="is_highest"/>
+                            <field name="currency_id" optional="hide"/>
+                            <field name="availability" 
+                                   decoration-success="availability == 'in_stock'"
+                                   decoration-warning="availability == 'limited'"
+                                   decoration-danger="availability == 'out_of_stock'"/>
+                            <field name="external_url" widget="url"/>
+                            <field name="last_update"/>
+                            <field name="is_lowest" column_invisible="1"/>
+                            <field name="is_highest" column_invisible="1"/>
+                            <button name="action_open_external_link" 
+                                    type="object" 
+                                    icon="fa-external-link" 
+                                    title="Open Product Link"
+                                    invisible="not external_url"/>
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Product Variant Form Extension -->
+    <record id="view_product_product_form_inherit_unified" model="ir.ui.view">
+        <field name="name">product.product.form.inherit.unified</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="External Source" name="external_source" invisible="not external_source">
+                    <!-- Quick Actions -->
+                    <div class="alert alert-info" role="alert" invisible="not external_source or external_source == 'manual'">
+                        <strong>External Product:</strong> This product is imported from 
+                        <field name="external_source" readonly="1" class="fw-bold"/>
+                    </div>
+                    
+                    <group>
+                        <group>
+                            <button name="action_open_external_link" 
+                                    string="Open External Link" 
+                                    type="object" 
+                                    class="btn-primary"
+                                    icon="fa-external-link"
+                                    invisible="not external_product_url"/>
+                            <button name="action_sync_from_source" 
+                                    string="Sync from Source" 
+                                    type="object" 
+                                    class="btn-success"
+                                    icon="fa-refresh"
+                                    invisible="external_source == 'manual'"/>
+                            <button name="action_view_sync_history" 
+                                    string="View Sync History" 
+                                    type="object" 
+                                    class="btn-secondary"
+                                    icon="fa-history"
+                                    invisible="external_source == 'manual'"/>
+                            <button name="action_clear_sync_error" 
+                                    string="Clear Error" 
+                                    type="object" 
+                                    class="btn-warning"
+                                    icon="fa-eraser"
+                                    invisible="external_sync_status != 'error'"/>
+                        </group>
+                    </group>
+                    
+                    <!-- External Source Information -->
+                    <group string="Source Information">
+                        <group>
+                            <field name="external_source" readonly="1"/>
+                            <field name="external_product_id" readonly="1"/>
+                            <field name="external_product_url" widget="url" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="external_import_date" readonly="1"/>
+                            <field name="external_update_count" readonly="1"/>
+                        </group>
+                    </group>
+                    
+                    <!-- Sync Status -->
+                    <group string="Sync Status">
+                        <group>
+                            <field name="external_sync_status" readonly="1"
+                                   decoration-success="external_sync_status == 'synced'"
+                                   decoration-danger="external_sync_status == 'error'"
+                                   decoration-warning="external_sync_status == 'pending'"/>
+                            <field name="external_last_sync" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="external_sync_error" 
+                                   widget="text" 
+                                   readonly="1"
+                                   invisible="not external_sync_error"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Product Template List Extension -->
+    <record id="view_product_template_list_inherit_unified" model="ir.ui.view">
+        <field name="name">product.template.list.inherit.unified</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='default_code']" position="after">
+                <field name="external_source" optional="hide"/>
+                <field name="external_sync_status" optional="hide"
+                       decoration-success="external_sync_status == 'synced'"
+                       decoration-danger="external_sync_status == 'error'"
+                       decoration-warning="external_sync_status == 'pending'"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Product Template Search Extension -->
+    <record id="view_product_template_search_inherit_unified" model="ir.ui.view">
+        <field name="name">product.template.search.inherit.unified</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_search_view"/>
+        <field name="arch" type="xml">
+            <!-- Add searchable fields -->
+            <field name="name" position="after">
+                <field name="external_source" string="External Source"/>
+                <field name="external_product_id" string="External ID"/>
+            </field>
+            
+            <!-- Add filters and group by at the end -->
+            <xpath expr="//search" position="inside">
+                <separator/>
+                <filter string="External Products" name="external_products" 
+                        domain="[('external_source', '!=', False), ('external_source', '!=', 'manual')]"/>
+                <filter string="Manual Products" name="manual_products" 
+                        domain="['|', ('external_source', '=', False), ('external_source', '=', 'manual')]"/>
+                <separator/>
+                <filter string="Vetution" name="vetution" domain="[('external_source', '=', 'vetution')]"/>
+                <filter string="Amin Petshop" name="amin_petshop" domain="[('external_source', '=', 'amin_petshop')]"/>
+                <filter string="Amazon" name="amazon" domain="[('external_source', '=', 'amazon')]"/>
+                <separator/>
+                <filter string="Synced" name="synced" domain="[('external_sync_status', '=', 'synced')]"/>
+                <filter string="Pending Sync" name="pending_sync" domain="[('external_sync_status', '=', 'pending')]"/>
+                <filter string="Sync Errors" name="sync_errors" domain="[('external_sync_status', '=', 'error')]"/>
+                
+                <group name="groupby">
+                    <filter string="External Source" name="group_external_source" context="{'group_by': 'external_source'}"/>
+                    <filter string="Sync Status" name="group_sync_status" context="{'group_by': 'external_sync_status'}"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Product Variant List Extension -->
+    <record id="view_product_product_list_inherit_unified" model="ir.ui.view">
+        <field name="name">product.product.list.inherit.unified</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_product_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='default_code']" position="after">
+                <field name="external_source" optional="hide"/>
+                <field name="external_sync_status" optional="hide"
+                       decoration-success="external_sync_status == 'synced'"
+                       decoration-danger="external_sync_status == 'error'"
+                       decoration-warning="external_sync_status == 'pending'"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

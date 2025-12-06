@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_amin_petshop_price_history_list" model="ir.ui.view">
+        <field name="name">amin.petshop.price.history.list</field>
+        <field name="model">amin.petshop.price.history</field>
+        <field name="arch" type="xml">
+            <list string="Price History">
+                <field name="product_id"/>
+                <field name="date"/>
+                <field name="price"/>
+                <field name="regular_price"/>
+                <field name="currency"/>
+                <field name="available" widget="boolean_toggle"/>
+                <field name="stock_status"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_amin_petshop_price_history_form" model="ir.ui.view">
+        <field name="name">amin.petshop.price.history.form</field>
+        <field name="model">amin.petshop.price.history</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="product_id"/>
+                            <field name="date"/>
+                        </group>
+                        <group>
+                            <field name="price"/>
+                            <field name="regular_price"/>
+                            <field name="currency"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="available"/>
+                        <field name="stock_status"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_amin_petshop_price_history_graph" model="ir.ui.view">
+        <field name="name">amin.petshop.price.history.graph</field>
+        <field name="model">amin.petshop.price.history</field>
+        <field name="arch" type="xml">
+            <graph string="Price History" type="line">
+                <field name="date" type="row"/>
+                <field name="price" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="action_amin_petshop_price_history" model="ir.actions.act_window">
+        <field name="name">Amin Petshop Price History</field>
+        <field name="res_model">amin.petshop.price.history</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No price history yet
+            </p>
+            <p>
+                Price history will be automatically created when product prices change.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_amin_petshop_price_history"
+              name="Price History"
+              parent="sale.sale_menu_root"
+              action="action_amin_petshop_price_history"
+              sequence="101"/>
+</odoo>

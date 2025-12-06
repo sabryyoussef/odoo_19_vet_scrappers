@@ -1,0 +1,104 @@
+[
+  {
+    "name": "NOBIVAC RABIES",
+    "link": "https://www.vetution.com/products/nobivac-rabies",
+    "brand": "MSD Animal Health",
+    "brand_link": "https://www.vetution.com/brands/msd-animal-health",
+    "review_count": 0,
+    "total_reviews": 0,
+    "rating": 4.5,
+    "ingredients": ["Inactivated virus"],
+    "sizes": ["1 dose"],
+    "express_delivery": true,
+    "cold_chain": true,
+    "price": 200.0,
+    "currency": "EGP",
+    "vendor_prices": [
+      {
+        "price": 200.0,
+        "currency": "EGP",
+        "expiration_date": "2028-02-28",
+        "available": true,
+        "vendor_name": "Vetution Store"
+      },
+      {
+        "price": 195.0,
+        "currency": "EGP",
+        "expiration_date": "2028-03-15",
+        "available": true,
+        "vendor_name": "Pet Care Plus"
+      }
+    ],
+    "min_price": 192.0,
+    "max_price": 210.0,
+    "image_url": "https://www.vetution.com/images/nobivac-rabies.jpg",
+    "tags": ["Cat", "Vaccines", "Dog"],
+    "species": ["Canine", "Feline"],
+    "whatsapp_contact": "https://wa.me/201234567890",
+    "detailed_sections": {
+      "composition": "Each dose contains inactivated rabies virus strain Pasteur RIV.",
+      "indications": "For active immunization of dogs and cats against rabies.",
+      "dose_and_administration": "Administer 1 ml subcutaneously. Primary vaccination: 1 dose at 12 weeks of age. Booster: annually.",
+      "precautions": "Store in refrigerator. Do not freeze.",
+      "pregnancy": "Safe for use in pregnant animals.",
+      "side_effects": "Mild local reactions may occur at injection site.",
+      "presentation": "1 dose vial",
+      "storage": "Store between 2°C and 8°C. Protect from light.",
+      "contraindications": "Do not use in animals with fever or acute infections.",
+      "warnings": "For veterinary use only.",
+      "interactions": "May be administered simultaneously with other vaccines.",
+      "overdose": "No adverse effects expected from overdose.",
+      "policy_of_ordering_shipping": "Orders shipped within 24 hours. Express delivery available.",
+      "delivery": "Standard delivery: 3-5 business days. Express: 1-2 business days.",
+      "return": "Returns accepted within 30 days of purchase if unopened."
+    }
+  },
+  {
+    "name": "FRONTLINE PLUS",
+    "link": "https://www.vetution.com/products/frontline-plus",
+    "brand": "Boehringer Ingelheim",
+    "brand_link": "https://www.vetution.com/brands/boehringer-ingelheim",
+    "review_count": 150,
+    "total_reviews": 150,
+    "rating": 4.8,
+    "ingredients": ["Fipronil", "S-Methoprene"],
+    "sizes": ["0.67 ml", "1.34 ml", "2.68 ml"],
+    "express_delivery": true,
+    "cold_chain": false,
+    "price": 85.0,
+    "currency": "EGP",
+    "vendor_prices": [
+      {
+        "price": 85.0,
+        "currency": "EGP",
+        "expiration_date": "2027-12-31",
+        "available": true,
+        "vendor_name": "Vetution Store"
+      }
+    ],
+    "min_price": 80.0,
+    "max_price": 90.0,
+    "image_url": "https://www.vetution.com/images/frontline-plus.jpg",
+    "tags": ["Flea", "Tick", "Dog", "Cat"],
+    "species": ["Canine", "Feline"],
+    "whatsapp_contact": "https://wa.me/201234567890",
+    "detailed_sections": {
+      "composition": "Fipronil 9.8% w/w, S-Methoprene 8.8% w/w",
+      "indications": "For the treatment and prevention of flea and tick infestations in dogs and cats.",
+      "dose_and_administration": "Apply topically once monthly. Part the hair and apply directly to skin.",
+      "precautions": "Do not bathe animal for 48 hours after application.",
+      "pregnancy": "Safe for use in pregnant and lactating animals.",
+      "side_effects": "Mild skin irritation may occur.",
+      "presentation": "Spot-on pipette",
+      "storage": "Store at room temperature. Keep out of reach of children.",
+      "contraindications": "Do not use in puppies or kittens under 8 weeks of age.",
+      "warnings": "For external use only. Avoid contact with eyes.",
+      "interactions": "No known interactions.",
+      "overdose": "If ingested, contact veterinarian immediately.",
+      "policy_of_ordering_shipping": "Free shipping on orders over 500 EGP.",
+      "delivery": "Standard delivery: 2-4 business days.",
+      "return": "Returns accepted within 14 days if unopened."
+    }
+  }
+]
+

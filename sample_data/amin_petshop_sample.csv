@@ -1,0 +1,5 @@
+name,default_code,list_price,external_product_id,external_url,availability,vendor_name
+Royal Canin Dog Food 15kg,RC-DOG-15,820,AMIN-001,https://aminpetshop.com/royal-canin-15kg,in_stock,Amin Petshop
+Pedigree Adult 10kg,PED-ADULT-10,400,AMIN-002,https://aminpetshop.com/pedigree-10kg,in_stock,Amin Petshop
+Whiskas Cat Food 7kg,WHIS-CAT-7,360,AMIN-003,https://aminpetshop.com/whiskas-7kg,in_stock,Amin Petshop
+

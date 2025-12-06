@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Import Wizard Form View -->
+    <record id="view_unified_import_wizard_form" model="ir.ui.view">
+        <field name="name">unified.import.wizard.form</field>
+        <field name="model">unified.import.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Import Products">
+                <header>
+                    <!-- Step 1: Upload -->
+                    <button name="action_next_step" 
+                            string="Next" 
+                            type="object" 
+                            class="oe_highlight"
+                            invisible="state != 'upload'"/>
+                    
+                    <!-- Step 2: Configure -->
+                    <button name="action_previous_step" 
+                            string="Back" 
+                            type="object"
+                            invisible="state not in ['configure', 'preview']"/>
+                    <button name="action_next_step" 
+                            string="Preview" 
+                            type="object" 
+                            class="oe_highlight"
+                            invisible="state != 'configure'"/>
+                    
+                    <!-- Step 3: Preview -->
+                    <button name="action_next_step" 
+                            string="Import Now" 
+                            type="object" 
+                            class="oe_highlight"
+                            invisible="state != 'preview'"/>
+                    
+                    <!-- Step 4: Done -->
+                    <button name="action_view_imported_products" 
+                            string="View Products" 
+                            type="object" 
+                            class="oe_highlight"
+                            invisible="state != 'done'"/>
+                    <button name="action_view_import_history" 
+                            string="View History" 
+                            type="object"
+                            invisible="state != 'done'"/>
+                    <button string="Close" special="cancel" invisible="state != 'done'"/>
+                    
+                    <field name="state" widget="statusbar" statusbar_visible="upload,configure,preview,import,done"/>
+                </header>
+                
+                <sheet>
+                    <!-- Step 1: Upload File -->
+                    <group invisible="state != 'upload'">
+                        <group string="Upload Import File">
+                            <field name="data_source_id" placeholder="Optional: Select configured data source"/>
+                            <field name="file_data" filename="file_name"/>
+                            <field name="file_name" invisible="1"/>
+                            <field name="file_type" readonly="1"/>
+                        </group>
+                        <group>
+                            <div class="alert alert-info" role="alert">
+                                <strong>Supported Formats:</strong>
+                                <ul>
+                                    <li><strong>CSV:</strong> Comma-separated values with header row</li>
+                                    <li><strong>JSON:</strong> Array of product objects or object with 'products' key</li>
+                                </ul>
+                                <p>Upload your file and click <strong>Next</strong> to continue.</p>
+                            </div>
+                        </group>
+                    </group>
+                    
+                    <!-- Step 2: Configure Import -->
+                    <group invisible="state != 'configure'">
+                        <group string="Source Configuration">
+                            <field name="source_system"/>
+                            <field name="match_strategy"/>
+                            <field name="duplicate_action"/>
+                        </group>
+                        <group string="Import Options">
+                            <field name="create_vendor_prices"/>
+                            <field name="update_cost_price"/>
+                            <field name="cost_price_strategy" invisible="not update_cost_price"/>
+                        </group>
+                    </group>
+                    
+                    <!-- Step 3: Preview Data -->
+                    <group invisible="state != 'preview'">
+                        <group string="Data Preview" colspan="2">
+                            <div class="alert alert-success" role="alert">
+                                <strong>Ready to Import!</strong>
+                                <p>Found <field name="total_records" readonly="1"/> records in file.</p>
+                                <p>Review the preview below and click <strong>Import Now</strong> when ready.</p>
+                            </div>
+                            <field name="preview_data" widget="text" nolabel="1" readonly="1"/>
+                        </group>
+                    </group>
+                    
+                    <!-- Step 4: Importing (Progress) -->
+                    <group invisible="state != 'import'">
+                        <div class="alert alert-warning" role="alert">
+                            <h4>Import in Progress...</h4>
+                            <p>Please wait while we import your products. This may take a few moments.</p>
+                            <p><i class="fa fa-spinner fa-spin fa-2x"></i></p>
+                        </div>
+                    </group>
+                    
+                    <!-- Step 5: Results -->
+                    <group invisible="state != 'done'">
+                        <group string="Import Results" colspan="2">
+                            <div class="alert alert-success" role="alert" invisible="products_failed > 0">
+                                <h4><i class="fa fa-check-circle"></i> Import Completed Successfully!</h4>
+                            </div>
+                            <div class="alert alert-warning" role="alert" invisible="products_failed == 0 or (products_created + products_updated) == 0">
+                                <h4><i class="fa fa-exclamation-triangle"></i> Import Completed with Errors</h4>
+                                <p>Some products were imported successfully, but some failed. Check the error log below.</p>
+                            </div>
+                            <div class="alert alert-danger" role="alert" invisible="(products_created + products_updated) > 0">
+                                <h4><i class="fa fa-times-circle"></i> Import Failed</h4>
+                                <p>No products were imported. Check the error log below.</p>
+                            </div>
+                        </group>
+                        
+                        <group string="Statistics">
+                            <field name="products_created" readonly="1"/>
+                            <field name="products_updated" readonly="1"/>
+                            <field name="products_skipped" readonly="1"/>
+                            <field name="products_failed" readonly="1"/>
+                            <field name="vendor_prices_created" readonly="1"/>
+                        </group>
+                        
+                        <group string="Import Log" colspan="2">
+                            <field name="import_log" widget="text" nolabel="1" readonly="1"/>
+                        </group>
+                        
+                        <group string="Error Log" colspan="2" invisible="not error_log">
+                            <field name="error_log" widget="text" nolabel="1" readonly="1"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Import Wizard Action -->
+    <record id="action_unified_import_wizard" model="ir.actions.act_window">
+        <field name="name">Import Products</field>
+        <field name="res_model">unified.import.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="product.model_product_template"/>
+        <field name="binding_view_types">form,list</field>
+    </record>
+</odoo>

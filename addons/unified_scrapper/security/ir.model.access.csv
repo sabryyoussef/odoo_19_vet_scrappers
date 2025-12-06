@@ -1,0 +1,14 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_unified_data_source_user,unified.data.source.user,model_unified_data_source,base.group_user,1,0,0,0
+access_unified_data_source_manager,unified.data.source.manager,model_unified_data_source,base.group_system,1,1,1,1
+access_unified_field_mapping_user,unified.field.mapping.user,model_unified_field_mapping,base.group_user,1,0,0,0
+access_unified_field_mapping_manager,unified.field.mapping.manager,model_unified_field_mapping,base.group_system,1,1,1,1
+access_unified_import_history_user,unified.import.history.user,model_unified_import_history,base.group_user,1,0,0,0
+access_unified_import_history_manager,unified.import.history.manager,model_unified_import_history,base.group_system,1,1,1,1
+access_unified_vendor_price_user,unified.vendor.price.user,model_unified_vendor_price,base.group_user,1,0,0,0
+access_unified_vendor_price_manager,unified.vendor.price.manager,model_unified_vendor_price,base.group_system,1,1,1,1
+access_unified_category_mapping_user,unified.category.mapping.user,model_unified_category_mapping,base.group_user,1,0,0,0
+access_unified_category_mapping_manager,unified.category.mapping.manager,model_unified_category_mapping,base.group_system,1,1,1,1
+
+access_unified_import_wizard_user,unified.import.wizard.user,model_unified_import_wizard,base.group_user,1,1,1,1
+

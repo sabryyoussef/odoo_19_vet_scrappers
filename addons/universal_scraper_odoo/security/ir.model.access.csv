@@ -1,0 +1,16 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_scraper_config_user,scraper.config.user,model_scraper_config,base.group_user,1,0,0,0
+access_scraper_config_manager,scraper.config.manager,model_scraper_config,base.group_system,1,1,1,1
+
+access_scraped_product_draft_user,scraped.product.draft.user,model_scraped_product_draft,base.group_user,1,1,1,0
+access_scraped_product_draft_manager,scraped.product.draft.manager,model_scraped_product_draft,base.group_system,1,1,1,1
+
+access_scraper_job_user,scraper.job.user,model_scraper_job,base.group_user,1,0,0,0
+access_scraper_job_manager,scraper.job.manager,model_scraper_job,base.group_system,1,1,1,1
+
+access_scraper_wizard_user,scraper.wizard.user,model_scraper_wizard,base.group_user,1,1,1,1
+access_scraper_wizard_manager,scraper.wizard.manager,model_scraper_wizard,base.group_system,1,1,1,1
+
+access_import_to_unified_wizard_user,import.to.unified.wizard.user,model_import_to_unified_wizard,base.group_user,1,1,1,1
+access_import_to_unified_wizard_manager,import.to.unified.wizard.manager,model_import_to_unified_wizard,base.group_system,1,1,1,1
+

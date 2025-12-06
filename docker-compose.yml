@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=odoo
+      - POSTGRES_PASSWORD=odoo
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - odoo-db-data:/var/lib/postgresql/data/pgdata
+    ports:
+      - "5433:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U odoo"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  odoo:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8070:8069"
+    environment:
+      - HOST=db
+      - USER=odoo
+      - PASSWORD=odoo
+    volumes:
+      - odoo-web-data:/var/lib/odoo
+      - ./addons:/mnt/extra-addons
+      - ./config:/etc/odoo
+      - /home/sabry3/vetutions:/mnt/vetutions-data:ro
+    command: ["odoo", "--dev=reload"]
+    shm_size: '2gb'
+    cap_add:
+      - SYS_ADMIN
+
+volumes:
+  odoo-db-data:
+  odoo-web-data:
+

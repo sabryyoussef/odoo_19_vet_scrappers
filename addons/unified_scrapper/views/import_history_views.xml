@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Import History List View -->
+    <record id="view_unified_import_history_list" model="ir.ui.view">
+        <field name="name">unified.import.history.list</field>
+        <field name="model">unified.import.history</field>
+        <field name="arch" type="xml">
+            <list string="Import History" default_order="import_date desc">
+                <field name="import_date"/>
+                <field name="data_source_id"/>
+                <field name="status" 
+                       decoration-success="status == 'success'"
+                       decoration-danger="status == 'failed'"
+                       decoration-warning="status == 'partial'"/>
+                <field name="total_records"/>
+                <field name="products_created"/>
+                <field name="products_updated"/>
+                <field name="products_skipped" optional="hide"/>
+                <field name="products_failed"/>
+                <field name="success_rate" widget="progressbar"/>
+                <field name="import_duration" widget="float_time"/>
+                <field name="user_id"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Import History Form View -->
+    <record id="view_unified_import_history_form" model="ir.ui.view">
+        <field name="name">unified.import.history.form</field>
+        <field name="model">unified.import.history</field>
+        <field name="arch" type="xml">
+            <form string="Import History">
+                <header>
+                    <button name="action_retry_import" 
+                            string="Retry Import" 
+                            type="object" 
+                            class="btn-primary"
+                            icon="fa-refresh"
+                            invisible="status == 'success'"/>
+                    <button name="action_view_created_products" 
+                            string="View Products" 
+                            type="object" 
+                            class="btn-secondary"
+                            icon="fa-cubes"/>
+                    <field name="status" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="display_name"/></h1>
+                    </div>
+                    
+                    <group>
+                        <group string="Import Information">
+                            <field name="data_source_id"/>
+                            <field name="import_date"/>
+                            <field name="import_duration" widget="float_time"/>
+                            <field name="user_id"/>
+                        </group>
+                        <group string="Import Settings">
+                            <field name="match_strategy"/>
+                            <field name="duplicate_handling"/>
+                            <field name="import_file_name"/>
+                        </group>
+                    </group>
+                    
+                    <group>
+                        <group string="Statistics">
+                            <field name="total_records"/>
+                            <field name="products_created"/>
+                            <field name="products_updated"/>
+                            <field name="products_skipped"/>
+                            <field name="products_failed"/>
+                            <field name="success_rate" widget="progressbar"/>
+                        </group>
+                        <group>
+                            <div class="o_field_widget">
+                                <div class="text-center">
+                                    <h2 class="mb-0">
+                                        <field name="success_rate" widget="float" 
+                                               class="text-success" 
+                                               invisible="status != 'success'"/>
+                                        <field name="success_rate" widget="float" 
+                                               class="text-danger" 
+                                               invisible="status != 'failed'"/>
+                                        <field name="success_rate" widget="float" 
+                                               class="text-warning" 
+                                               invisible="status != 'partial'"/>
+                                        %
+                                    </h2>
+                                    <p class="text-muted">Success Rate</p>
+                                </div>
+                            </div>
+                        </group>
+                    </group>
+                    
+                    <notebook>
+                        <page string="Import Log" name="import_log">
+                            <field name="import_log" widget="text" readonly="1"/>
+                        </page>
+                        
+                        <page string="Error Log" name="error_log" invisible="not error_log">
+                            <field name="error_log" widget="text" readonly="1"/>
+                        </page>
+                        
+                        <page string="Import File" name="import_file" invisible="not import_file">
+                            <group>
+                                <field name="import_file" filename="import_file_name"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Import History Graph View -->
+    <record id="view_unified_import_history_graph" model="ir.ui.view">
+        <field name="name">unified.import.history.graph</field>
+        <field name="model">unified.import.history</field>
+        <field name="arch" type="xml">
+            <graph string="Import Statistics" type="bar" stacked="True">
+                <field name="data_source_id"/>
+                <field name="products_created" type="measure"/>
+                <field name="products_updated" type="measure"/>
+                <field name="products_failed" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Import History Pivot View -->
+    <record id="view_unified_import_history_pivot" model="ir.ui.view">
+        <field name="name">unified.import.history.pivot</field>
+        <field name="model">unified.import.history</field>
+        <field name="arch" type="xml">
+            <pivot string="Import Analysis">
+                <field name="data_source_id" type="row"/>
+                <field name="status" type="col"/>
+                <field name="products_created" type="measure"/>
+                <field name="products_updated" type="measure"/>
+                <field name="products_failed" type="measure"/>
+                <field name="success_rate" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- Import History Search View -->
+    <record id="view_unified_import_history_search" model="ir.ui.view">
+        <field name="name">unified.import.history.search</field>
+        <field name="model">unified.import.history</field>
+        <field name="arch" type="xml">
+            <search string="Import History">
+                <field name="data_source_id" string="Data Source"/>
+                <field name="user_id" string="User"/>
+                <field name="import_date" string="Import Date"/>
+                <separator/>
+                <filter name="success" string="Success" domain="[('status', '=', 'success')]"/>
+                <filter name="failed" string="Failed" domain="[('status', '=', 'failed')]"/>
+                <filter name="partial" string="Partial Success" domain="[('status', '=', 'partial')]"/>
+                <separator/>
+                <filter name="has_errors" string="Has Errors" domain="[('products_failed', '&gt;', 0)]"/>
+                <group name="groupby">
+                    <filter name="group_data_source" string="Data Source" context="{'group_by': 'data_source_id'}"/>
+                    <filter name="group_status" string="Status" context="{'group_by': 'status'}"/>
+                    <filter name="group_user" string="User" context="{'group_by': 'user_id'}"/>
+                    <filter name="group_import_date" string="Import Date" context="{'group_by': 'import_date:month'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Import History Action -->
+    <record id="action_unified_import_history" model="ir.actions.act_window">
+        <field name="name">Import History</field>
+        <field name="res_model">unified.import.history</field>
+        <field name="view_mode">list,form,graph,pivot</field>
+        <field name="context">{'search_default_last_30_days': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No import history yet
+            </p>
+            <p>
+                Import history will appear here after you run your first import.
+                Each import is logged with detailed statistics and error messages.
+            </p>
+        </field>
+    </record>
+</odoo>

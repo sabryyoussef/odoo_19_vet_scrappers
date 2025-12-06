@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vendor Price List View -->
+    <record id="view_unified_vendor_price_list" model="ir.ui.view">
+        <field name="name">unified.vendor.price.list</field>
+        <field name="model">unified.vendor.price</field>
+        <field name="arch" type="xml">
+            <list string="Vendor Prices" default_order="price asc">
+                <field name="product_tmpl_id"/>
+                <field name="source"/>
+                <field name="vendor_name"/>
+                <field name="price" decoration-success="is_lowest" decoration-danger="is_highest"/>
+                <field name="currency_id" optional="hide"/>
+                <field name="availability" 
+                       decoration-success="availability == 'in_stock'"
+                       decoration-warning="availability == 'limited'"
+                       decoration-danger="availability == 'out_of_stock'"/>
+                <field name="external_url" widget="url" optional="show"/>
+                <field name="last_update"/>
+                <field name="is_lowest" column_invisible="1"/>
+                <field name="is_highest" column_invisible="1"/>
+                <button name="action_open_external_link" 
+                        type="object" 
+                        icon="fa-external-link" 
+                        title="Open Product Link"
+                        invisible="not external_url"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vendor Price Form View -->
+    <record id="view_unified_vendor_price_form" model="ir.ui.view">
+        <field name="name">unified.vendor.price.form</field>
+        <field name="model">unified.vendor.price</field>
+        <field name="arch" type="xml">
+            <form string="Vendor Price">
+                <header>
+                    <button name="action_open_external_link" 
+                            string="Open Product Link" 
+                            type="object" 
+                            class="oe_highlight"
+                            invisible="not external_url"
+                            icon="fa-external-link"/>
+                    <button name="action_update_price" 
+                            string="Update Price" 
+                            type="object"
+                            icon="fa-refresh"/>
+                    <field name="active" widget="boolean_toggle"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_open_external_link" 
+                                type="object" 
+                                class="oe_stat_button" 
+                                icon="fa-external-link"
+                                invisible="not external_url">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_text">View on</span>
+                                <span class="o_stat_text" field="source"/>
+                            </div>
+                        </button>
+                    </div>
+                    
+                    <div class="oe_title">
+                        <label for="product_tmpl_id" class="oe_edit_only"/>
+                        <h1>
+                            <field name="product_tmpl_id" placeholder="Select Product..."/>
+                        </h1>
+                    </div>
+                    
+                    <group>
+                        <group name="source_info" string="Source Information">
+                            <field name="source"/>
+                            <field name="vendor_name"/>
+                            <field name="data_source_id"/>
+                        </group>
+                        <group name="price_info" string="Price Information">
+                            <field name="price"/>
+                            <field name="currency_id"/>
+                            <field name="price_company_currency" invisible="currency_id == company_currency_id"/>
+                            <field name="company_currency_id" column_invisible="1"/>
+                        </group>
+                    </group>
+                    
+                    <group>
+                        <group name="external_ref" string="External Reference">
+                            <field name="external_product_id"/>
+                            <field name="external_url" widget="url"/>
+                        </group>
+                        <group name="availability_info" string="Availability">
+                            <field name="availability"/>
+                            <field name="stock_quantity"/>
+                        </group>
+                    </group>
+                    
+                    <group>
+                        <group name="metadata" string="Metadata">
+                            <field name="first_seen" readonly="1"/>
+                            <field name="last_update" readonly="1"/>
+                        </group>
+                        <group name="comparison" string="Price Comparison">
+                            <field name="is_lowest" widget="boolean"/>
+                            <field name="is_highest" widget="boolean"/>
+                            <field name="price_difference" invisible="is_lowest"/>
+                        </group>
+                    </group>
+                    
+                    <group name="notes" string="Notes">
+                        <field name="notes" nolabel="1" placeholder="Additional notes about this vendor price..."/>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vendor Price Search View -->
+    <record id="view_unified_vendor_price_search" model="ir.ui.view">
+        <field name="name">unified.vendor.price.search</field>
+        <field name="model">unified.vendor.price</field>
+        <field name="arch" type="xml">
+            <search string="Vendor Prices">
+                <field name="product_tmpl_id" string="Product"/>
+                <field name="source" string="Source"/>
+                <field name="vendor_name" string="Vendor"/>
+                <field name="external_product_id" string="External ID"/>
+                <separator/>
+                <filter name="active" string="Active" domain="[('active', '=', True)]"/>
+                <filter name="inactive" string="Archived" domain="[('active', '=', False)]"/>
+                <separator/>
+                <filter name="in_stock" string="In Stock" domain="[('availability', '=', 'in_stock')]"/>
+                <filter name="out_of_stock" string="Out of Stock" domain="[('availability', '=', 'out_of_stock')]"/>
+                <separator/>
+                <filter name="vetution" string="Vetution" domain="[('source', '=', 'vetution')]"/>
+                <filter name="amin_petshop" string="Amin Petshop" domain="[('source', '=', 'amin_petshop')]"/>
+                <filter name="amazon" string="Amazon" domain="[('source', '=', 'amazon')]"/>
+                <group name="groupby">
+                    <filter name="group_product" string="Product" context="{'group_by': 'product_tmpl_id'}"/>
+                    <filter name="group_source" string="Source" context="{'group_by': 'source'}"/>
+                    <filter name="group_vendor" string="Vendor" context="{'group_by': 'vendor_name'}"/>
+                    <filter name="group_availability" string="Availability" context="{'group_by': 'availability'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Vendor Price Action -->
+    <record id="action_unified_vendor_price" model="ir.actions.act_window">
+        <field name="name">Vendor Prices</field>
+        <field name="res_model">unified.vendor.price</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_active': 1, 'search_default_group_product': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No vendor prices yet
+            </p>
+            <p>
+                Vendor prices are automatically created when importing products from external sources.
+                Each product can have multiple prices from different vendors, allowing easy price comparison.
+            </p>
+        </field>
+    </record>
+</odoo>

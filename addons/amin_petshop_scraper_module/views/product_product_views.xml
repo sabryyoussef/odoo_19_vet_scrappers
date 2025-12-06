@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Product Template Form View Extension -->
+    <record id="view_product_template_form_inherit_amin_petshop" model="ir.ui.view">
+        <field name="name">product.template.form.inherit.amin.petshop</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Amin Petshop" name="amin_petshop">
+                    <!-- Quick Actions -->
+                    <group>
+                        <group>
+                            <button name="action_open_amin_petshop_link" 
+                                    string="Open Amin Petshop Link" 
+                                    type="object" 
+                                    class="btn-primary"
+                                    icon="fa-external-link"
+                                    invisible="not product_variant_ids.amin_petshop_link"/>
+                            <button name="action_update_from_amin_petshop" 
+                                    string="Update from Amin Petshop" 
+                                    type="object"
+                                    icon="fa-refresh"
+                                    invisible="not product_variant_ids.amin_petshop_link"/>
+                            <button name="action_view_price_history" 
+                                    string="View Price History" 
+                                    type="object"
+                                    icon="fa-line-chart"
+                                    invisible="not product_variant_ids.amin_petshop_link"/>
+                        </group>
+                    </group>
+
+                    <!-- Basic Information -->
+                    <group string="Basic Information">
+                        <group>
+                            <field name="amin_petshop_link" widget="url"/>
+                            <field name="amin_petshop_image_url" widget="url"/>
+                            <field name="amin_petshop_sku"/>
+                            <field name="amin_petshop_brand"/>
+                        </group>
+                    </group>
+
+                    <!-- Pricing -->
+                    <group string="Pricing">
+                        <group>
+                            <field name="amin_petshop_price"/>
+                            <field name="amin_petshop_regular_price"/>
+                            <field name="amin_petshop_currency"/>
+                            <field name="amin_petshop_has_discount"/>
+                            <field name="amin_petshop_discount_percentage"/>
+                            <field name="amin_petshop_discount_amount"/>
+                        </group>
+                        <group>
+                            <field name="amin_petshop_last_price_update"/>
+                        </group>
+                    </group>
+
+                    <!-- Category -->
+                    <group string="Category">
+                        <group>
+                            <field name="amin_petshop_main_category"/>
+                            <field name="amin_petshop_subcategory"/>
+                            <field name="amin_petshop_category_path"/>
+                            <field name="amin_petshop_collection"/>
+                        </group>
+                    </group>
+
+                    <!-- Availability -->
+                    <group string="Availability">
+                        <group>
+                            <field name="amin_petshop_available"/>
+                            <field name="amin_petshop_stock_status"/>
+                            <field name="amin_petshop_last_stock_check"/>
+                        </group>
+                    </group>
+
+                    <!-- Product Details -->
+                    <group string="Product Details">
+                        <field name="amin_petshop_short_description" widget="text"/>
+                        <field name="amin_petshop_description" widget="text"/>
+                        <field name="amin_petshop_specifications" widget="text"/>
+                        <field name="amin_petshop_variants" widget="text"/>
+                    </group>
+
+                    <!-- Price History -->
+                    <group string="Price History">
+                        <field name="amin_petshop_price_history_ids" nolabel="1">
+                            <list>
+                                <field name="date"/>
+                                <field name="price"/>
+                                <field name="regular_price"/>
+                                <field name="currency"/>
+                                <field name="available" widget="boolean_toggle"/>
+                                <field name="stock_status"/>
+                            </list>
+                        </field>
+                    </group>
+
+                    <!-- Tracking -->
+                    <group string="Tracking">
+                        <group>
+                            <field name="amin_petshop_first_seen"/>
+                            <field name="amin_petshop_last_updated"/>
+                            <field name="amin_petshop_update_count"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Product Variant Form View Extension -->
+    <record id="view_product_product_form_inherit_amin_petshop" model="ir.ui.view">
+        <field name="name">product.product.form.inherit.amin.petshop</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+            <!-- Add page to existing notebook (if notebook exists from other modules) -->
+            <xpath expr="//notebook" position="inside">
+                <page string="Amin Petshop" name="amin_petshop">
+                    <!-- Quick Actions -->
+                    <group>
+                        <group>
+                            <button name="action_open_amin_petshop_link" 
+                                    string="Open Amin Petshop Link" 
+                                    type="object" 
+                                    class="btn-primary"
+                                    icon="fa-external-link"
+                                    invisible="not amin_petshop_link"/>
+                            <button name="action_update_from_amin_petshop" 
+                                    string="Update from Amin Petshop" 
+                                    type="object"
+                                    icon="fa-refresh"
+                                    invisible="not amin_petshop_link"/>
+                            <button name="action_view_price_history" 
+                                    string="View Price History" 
+                                    type="object"
+                                    icon="fa-line-chart"
+                                    invisible="not amin_petshop_link"/>
+                        </group>
+                    </group>
+
+                    <!-- Basic Information -->
+                    <group string="Basic Information">
+                        <group>
+                            <field name="amin_petshop_link" widget="url"/>
+                            <field name="amin_petshop_image_url" widget="url"/>
+                            <field name="amin_petshop_sku"/>
+                            <field name="amin_petshop_brand"/>
+                        </group>
+                    </group>
+
+                    <!-- Pricing -->
+                    <group string="Pricing">
+                        <group>
+                            <field name="amin_petshop_price"/>
+                            <field name="amin_petshop_regular_price"/>
+                            <field name="amin_petshop_currency"/>
+                            <field name="amin_petshop_has_discount"/>
+                            <field name="amin_petshop_discount_percentage"/>
+                            <field name="amin_petshop_discount_amount"/>
+                        </group>
+                        <group>
+                            <field name="amin_petshop_last_price_update"/>
+                        </group>
+                    </group>
+
+                    <!-- Category -->
+                    <group string="Category">
+                        <group>
+                            <field name="amin_petshop_main_category"/>
+                            <field name="amin_petshop_subcategory"/>
+                            <field name="amin_petshop_category_path"/>
+                            <field name="amin_petshop_collection"/>
+                        </group>
+                    </group>
+
+                    <!-- Availability -->
+                    <group string="Availability">
+                        <group>
+                            <field name="amin_petshop_available"/>
+                            <field name="amin_petshop_stock_status"/>
+                            <field name="amin_petshop_last_stock_check"/>
+                        </group>
+                    </group>
+
+                    <!-- Product Details -->
+                    <group string="Product Details">
+                        <field name="amin_petshop_short_description" widget="text"/>
+                        <field name="amin_petshop_description" widget="text"/>
+                        <field name="amin_petshop_specifications" widget="text"/>
+                        <field name="amin_petshop_variants" widget="text"/>
+                    </group>
+
+                    <!-- Price History -->
+                    <group string="Price History">
+                        <field name="amin_petshop_price_history_ids" nolabel="1" context="{'default_product_id': id}">
+                            <list>
+                                <field name="date"/>
+                                <field name="price"/>
+                                <field name="regular_price"/>
+                                <field name="currency"/>
+                                <field name="available" widget="boolean_toggle"/>
+                                <field name="stock_status"/>
+                            </list>
+                        </field>
+                    </group>
+
+                    <!-- Tracking -->
+                    <group string="Tracking">
+                        <group>
+                            <field name="amin_petshop_first_seen"/>
+                            <field name="amin_petshop_last_updated"/>
+                            <field name="amin_petshop_update_count"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Product Tree View Extension -->
+    <record id="view_product_product_tree_inherit_amin_petshop" model="ir.ui.view">
+        <field name="name">product.product.tree.inherit.amin.petshop</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_product_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='default_code']" position="after">
+                <field name="amin_petshop_price" optional="hide" string="Amin Price"/>
+                <field name="amin_petshop_available" optional="hide" widget="boolean_toggle" string="Amin Available"/>
+                <field name="amin_petshop_main_category" optional="hide" string="Amin Category"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Product Search View Extension -->
+    <record id="view_product_product_search_inherit_amin_petshop" model="ir.ui.view">
+        <field name="name">product.product.search.inherit.amin.petshop</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_search_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='filter_to_sell']" position="after">
+                <separator/>
+                <filter string="Amin Petshop Products" name="amin_petshop_products" domain="[('amin_petshop_link', '!=', False)]"/>
+                <filter string="Has Discount" name="has_discount" domain="[('amin_petshop_has_discount', '=', True)]"/>
+                <filter string="In Stock" name="in_stock" domain="[('amin_petshop_stock_status', '=', 'in_stock')]"/>
+            </xpath>
+            <xpath expr="//search" position="inside">
+                <field name="amin_petshop_sku" string="Amin SKU"/>
+                <field name="amin_petshop_brand" string="Amin Brand"/>
+                <field name="amin_petshop_main_category" string="Amin Category"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

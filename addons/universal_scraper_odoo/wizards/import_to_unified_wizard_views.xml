@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Import to Unified Wizard Form View -->
+    <record id="view_import_to_unified_wizard_form" model="ir.ui.view">
+        <field name="name">import.to.unified.wizard.form</field>
+        <field name="model">import.to.unified.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Import to Unified Scrapper">
+                <sheet>
+                    <div class="alert alert-success" role="alert">
+                        <strong>✅ Ready to Import:</strong> Import approved scraped products to Unified Scrapper module.
+                        This will create final product records with vendor prices.
+                    </div>
+                    
+                    <group>
+                        <group string="Import Settings">
+                            <field name="product_count" readonly="1"/>
+                            <field name="data_source_id" readonly="1"/>
+                            <field name="match_strategy"/>
+                            <field name="duplicate_handling"/>
+                        </group>
+                        <group string="Pricing Strategy">
+                            <field name="cost_price_strategy"/>
+                            <field name="create_vendor_prices"/>
+                        </group>
+                    </group>
+                    
+                    <group string="Products to Import">
+                        <field name="draft_ids" nolabel="1" widget="many2many_tags"/>
+                    </group>
+                    
+                    <div class="alert alert-info" role="alert">
+                        <strong>ℹ️ Import Process:</strong>
+                        <ol>
+                            <li>Products will be matched using the selected strategy</li>
+                            <li>Duplicates will be handled according to your selection</li>
+                            <li>Vendor prices will be created for multi-source tracking</li>
+                            <li>Main product cost price will be calculated automatically</li>
+                        </ol>
+                    </div>
+                </sheet>
+                <footer>
+                    <button name="action_import" string="Import Now" type="object" class="btn-primary" icon="fa-upload"/>
+                    <button string="Cancel" special="cancel" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_import_to_unified_wizard" model="ir.actions.act_window">
+        <field name="name">Import to Unified Scrapper</field>
+        <field name="res_model">import.to.unified.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="model_scraped_product_draft"/>
+        <field name="binding_type">action</field>
+    </record>
+</odoo>

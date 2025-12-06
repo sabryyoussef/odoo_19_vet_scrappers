@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Amin Petshop Category Mappings -->
+    
+    <!-- Main Categories -->
+    <record id="category_amin_dog" model="unified.category.mapping">
+        <field name="data_source_id" ref="data_source_amin_petshop"/>
+        <field name="external_category_id">dog</field>
+        <field name="external_category_name">Dog</field>
+        <field name="external_category_url">https://aminpetshop.com/collections/dog</field>
+        <field name="sequence">10</field>
+        <field name="import_enabled" eval="True"/>
+        <field name="auto_create_category" eval="True"/>
+    </record>
+    
+    <record id="category_amin_cat" model="unified.category.mapping">
+        <field name="data_source_id" ref="data_source_amin_petshop"/>
+        <field name="external_category_id">cat</field>
+        <field name="external_category_name">Cat</field>
+        <field name="external_category_url">https://aminpetshop.com/collections/cat</field>
+        <field name="sequence">20</field>
+        <field name="import_enabled" eval="True"/>
+        <field name="auto_create_category" eval="True"/>
+    </record>
+    
+    <!-- Dog Food Categories -->
+    <record id="category_amin_adult_dog" model="unified.category.mapping">
+        <field name="data_source_id" ref="data_source_amin_petshop"/>
+        <field name="external_category_id">adult-dog</field>
+        <field name="external_category_name">Adult Dog Food</field>
+        <field name="external_category_url">https://aminpetshop.com/collections/adult-dog</field>
+        <field name="external_parent_id">dog</field>
+        <field name="sequence">100</field>
+        <field name="import_enabled" eval="True"/>
+        <field name="auto_create_category" eval="True"/>
+    </record>
+    
+    <record id="category_amin_adult_dog_dry" model="unified.category.mapping">
+        <field name="data_source_id" ref="data_source_amin_petshop"/>
+        <field name="external_category_id">adult-dog-dry-food</field>
+        <field name="external_category_name">Adult Dog Dry Food</field>
+        <field name="external_category_url">https://aminpetshop.com/collections/adult-dog-dry-food</field>
+        <field name="external_parent_id">adult-dog</field>
+        <field name="sequence">101</field>
+        <field name="import_enabled" eval="True"/>
+        <field name="auto_create_category" eval="True"/>
+    </record>
+    
+    <record id="category_amin_adult_dog_wet" model="unified.category.mapping">
+        <field name="data_source_id" ref="data_source_amin_petshop"/>
+        <field name="external_category_id">adult-dog-wet-food</field>
+        <field name="external_category_name">Adult Dog Wet Food</field>
+        <field name="external_category_url">https://aminpetshop.com/collections/adult-dog-wet-food</field>
+        <field name="external_parent_id">adult-dog</field>
+        <field name="sequence">102</field>
+        <field name="import_enabled" eval="True"/>
+        <field name="auto_create_category" eval="True"/>
+    </record>
+    
+    <record id="category_amin_fresh_food" model="unified.category.mapping">
+        <field name="data_source_id" ref="data_source_amin_petshop"/>
+        <field name="external_category_id">woof-fetch/fresh-food</field>
+        <field name="external_category_name">Fresh Dog Food</field>
+        <field name="external_category_url">https://aminpetshop.com/collections/woof-fetch/fresh-food</field>
+        <field name="external_parent_id">dog</field>
+        <field name="sequence">103</field>
+        <field name="import_enabled" eval="True"/>
+        <field name="auto_create_category" eval="True"/>
+    </record>
+    
+    <!-- Puppy Food -->
+    <record id="category_amin_puppy" model="unified.category.mapping">
+        <field name="data_source_id" ref="data_source_amin_petshop"/>
+        <field name="external_category_id">puppy</field>
+        <field name="external_category_name">Puppy Food</field>
+        <field name="external_category_url">https://aminpetshop.com/collections/puppy</field>
+        <field name="external_parent_id">dog</field>
+        <field name="sequence">110</field>
+        <field name="import_enabled" eval="True"/>
+        <field name="auto_create_category" eval="True"/>
+    </record>
+    
+    <record id="category_amin_puppy_dry" model="unified.category.mapping">
+        <field name="data_source_id" ref="data_source_amin_petshop"/>
+        <field name="external_category_id">puppy-dry-food</field>
+        <field name="external_category_name">Puppy Dry Food</field>
+        <field name="external_category_url">https://aminpetshop.com/collections/puppy-dry-food</field>
+        <field name="external_parent_id">puppy</field>
+        <field name="sequence">111</field>
+        <field name="import_enabled" eval="True"/>
+        <field name="auto_create_category" eval="True"/>
+    </record>
+    
+    <record id="category_amin_puppy_wet" model="unified.category.mapping">
+        <field name="data_source_id" ref="data_source_amin_petshop"/>
+        <field name="external_category_id">wet-puppy-food</field>
+        <field name="external_category_name">Puppy Wet Food</field>
+        <field name="external_category_url">https://aminpetshop.com/collections/wet-puppy-food</field>
+        <field name="external_parent_id">puppy</field>
+        <field name="sequence">112</field>
+        <field name="import_enabled" eval="True"/>
+        <field name="auto_create_category" eval="True"/>
+    </record>
+    
+    <record id="category_amin_dog_milk" model="unified.category.mapping">
+        <field name="data_source_id" ref="data_source_amin_petshop"/>
+        <field name="external_category_id">dog-milk</field>
+        <field name="external_category_name">Dog Milk</field>
+        <field name="external_category_url">https://aminpetshop.com/collections/dog-milk</field>
+        <field name="external_parent_id">puppy</field>
+        <field name="sequence">113</field>
+        <field name="import_enabled" eval="True"/>
+        <field name="auto_create_category" eval="True"/>
+    </record>
+    
+    <!-- Dog Treats & Snacks -->
+    <record id="category_amin_bones_snacks" model="unified.category.mapping">
+        <field name="data_source_id" ref="data_source_amin_petshop"/>
+        <field name="external_category_id">bones-snacks</field>
+        <field name="external_category_name">Bones, Snacks &amp; Treats</field>
+        <field name="external_category_url">https://aminpetshop.com/collections/bones-snacks</field>
+        <field name="external_parent_id">dog</field>
+        <field name="sequence">120</field>
+        <field name="import_enabled" eval="True"/>
+        <field name="auto_create_category" eval="True"/>
+    </record>
+    
+    <record id="category_amin_bones" model="unified.category.mapping">
+        <field name="data_source_id" ref="data_source_amin_petshop"/>
+        <field name="external_category_id">bones</field>
+        <field name="external_category_name">Dog Bones</field>
+        <field name="external_category_url">https://aminpetshop.com/collections/bones</field>
+        <field name="external_parent_id">bones-snacks</field>
+        <field name="sequence">121</field>
+        <field name="import_enabled" eval="True"/>
+        <field name="auto_create_category" eval="True"/>
+    </record>
+    
+    <record id="category_amin_dog_snacks" model="unified.category.mapping">
+        <field name="data_source_id" ref="data_source_amin_petshop"/>
+        <field name="external_category_id">dog-snacks</field>
+        <field name="external_category_name">Dog Snacks</field>
+        <field name="external_category_url">https://aminpetshop.com/collections/dog-snacks</field>
+        <field name="external_parent_id">bones-snacks</field>
+        <field name="sequence">122</field>
+        <field name="import_enabled" eval="True"/>
+        <field name="auto_create_category" eval="True"/>
+    </record>
+    
+    <record id="category_amin_dog_treats" model="unified.category.mapping">
+        <field name="data_source_id" ref="data_source_amin_petshop"/>
+        <field name="external_category_id">dog-treats</field>
+        <field name="external_category_name">Dog Treats</field>
+        <field name="external_category_url">https://aminpetshop.com/collections/dog-treats</field>
+        <field name="external_parent_id">bones-snacks</field>
+        <field name="sequence">123</field>
+        <field name="import_enabled" eval="True"/>
+        <field name="auto_create_category" eval="True"/>
+    </record>
+    
+    <!-- Dog Grooming & Healthcare -->
+    <record id="category_amin_grooming_healthcare" model="unified.category.mapping">
+        <field name="data_source_id" ref="data_source_amin_petshop"/>
+        <field name="external_category_id">grooming-healthcare</field>
+        <field name="external_category_name">Grooming &amp; Healthcare</field>
+        <field name="external_category_url">https://aminpetshop.com/collections/grooming-healthcare</field>
+        <field name="external_parent_id">dog</field>
+        <field name="sequence">130</field>
+        <field name="import_enabled" eval="True"/>
+        <field name="auto_create_category" eval="True"/>
+    </record>
+    
+    <record id="category_amin_grooming" model="unified.category.mapping">
+        <field name="data_source_id" ref="data_source_amin_petshop"/>
+        <field name="external_category_id">grooming</field>
+        <field name="external_category_name">Dog Grooming</field>
+        <field name="external_category_url">https://aminpetshop.com/collections/grooming</field>
+        <field name="external_parent_id">grooming-healthcare</field>
+        <field name="sequence">131</field>
+        <field name="import_enabled" eval="True"/>
+        <field name="auto_create_category" eval="True"/>
+    </record>
+    
+    <record id="category_amin_flea_tick" model="unified.category.mapping">
+        <field name="data_source_id" ref="data_source_amin_petshop"/>
+        <field name="external_category_id">dog-flea-tick-treatments</field>
+        <field name="external_category_name">Flea &amp; Tick Treatments</field>
+        <field name="external_category_url">https://aminpetshop.com/collections/dog-flea-tick-treatments</field>
+        <field name="external_parent_id">grooming-healthcare</field>
+        <field name="sequence">132</field>
+        <field name="import_enabled" eval="True"/>
+        <field name="auto_create_category" eval="True"/>
+    </record>
+    
+    <record id="category_amin_supplements" model="unified.category.mapping">
+        <field name="data_source_id" ref="data_source_amin_petshop"/>
+        <field name="external_category_id">dog-supplements</field>
+        <field name="external_category_name">Dog Supplements</field>
+        <field name="external_category_url">https://aminpetshop.com/collections/dog-supplements</field>
+        <field name="external_parent_id">grooming-healthcare</field>
+        <field name="sequence">133</field>
+        <field name="import_enabled" eval="True"/>
+        <field name="auto_create_category" eval="True"/>
+    </record>
+    
+    <!-- Dog Accessories -->
+    <record id="category_amin_dog_accessories" model="unified.category.mapping">
+        <field name="data_source_id" ref="data_source_amin_petshop"/>
+        <field name="external_category_id">dog-accessories</field>
+        <field name="external_category_name">Dog Accessories</field>
+        <field name="external_category_url">https://aminpetshop.com/collections/dog-accessories</field>
+        <field name="external_parent_id">dog</field>
+        <field name="sequence">140</field>
+        <field name="import_enabled" eval="True"/>
+        <field name="auto_create_category" eval="True"/>
+    </record>
+    
+    <record id="category_amin_dog_toys" model="unified.category.mapping">
+        <field name="data_source_id" ref="data_source_amin_petshop"/>
+        <field name="external_category_id">dog-toys</field>
+        <field name="external_category_name">Dog Toys</field>
+        <field name="external_category_url">https://aminpetshop.com/collections/dog-toys</field>
+        <field name="external_parent_id">dog-accessories</field>
+        <field name="sequence">141</field>
+        <field name="import_enabled" eval="True"/>
+        <field name="auto_create_category" eval="True"/>
+    </record>
+    
+    <record id="category_amin_dog_beds" model="unified.category.mapping">
+        <field name="data_source_id" ref="data_source_amin_petshop"/>
+        <field name="external_category_id">dog-beds</field>
+        <field name="external_category_name">Dog Beds</field>
+        <field name="external_category_url">https://aminpetshop.com/collections/dog-beds</field>
+        <field name="external_parent_id">dog-accessories</field>
+        <field name="sequence">142</field>
+        <field name="import_enabled" eval="True"/>
+        <field name="auto_create_category" eval="True"/>
+    </record>
+    
+    <record id="category_amin_dog_bowls" model="unified.category.mapping">
+        <field name="data_source_id" ref="data_source_amin_petshop"/>
+        <field name="external_category_id">dog-bowls</field>
+        <field name="external_category_name">Dog Bowls</field>
+        <field name="external_category_url">https://aminpetshop.com/collections/dog-bowls</field>
+        <field name="external_parent_id">dog-accessories</field>
+        <field name="sequence">143</field>
+        <field name="import_enabled" eval="True"/>
+        <field name="auto_create_category" eval="True"/>
+    </record>
+    
+    <!-- Special Categories -->
+    <record id="category_amin_offers" model="unified.category.mapping">
+        <field name="data_source_id" ref="data_source_amin_petshop"/>
+        <field name="external_category_id">end-of-year-sale</field>
+        <field name="external_category_name">Offers &amp; Sales</field>
+        <field name="external_category_url">https://aminpetshop.com/collections/end-of-year-sale</field>
+        <field name="sequence">5</field>
+        <field name="import_enabled" eval="True"/>
+        <field name="auto_create_category" eval="True"/>
+        <field name="notes">Special offers and sales - check regularly for updates</field>
+    </record>
+    
+    <record id="category_amin_clinic" model="unified.category.mapping">
+        <field name="data_source_id" ref="data_source_amin_petshop"/>
+        <field name="external_category_id">amin-clinic</field>
+        <field name="external_category_name">Amin Clinic</field>
+        <field name="external_category_url">https://aminpetshop.com/collections/amin-clinic</field>
+        <field name="sequence">200</field>
+        <field name="import_enabled" eval="False"/>
+        <field name="auto_create_category" eval="True"/>
+        <field name="notes">Clinic services - may not be physical products</field>
+    </record>
+</odoo>

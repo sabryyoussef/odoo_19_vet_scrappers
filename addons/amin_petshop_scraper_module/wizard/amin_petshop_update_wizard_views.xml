@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_amin_petshop_update_wizard_form" model="ir.ui.view">
+        <field name="name">amin.petshop.update.wizard.form</field>
+        <field name="model">amin.petshop.update.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Update Products from Amin Petshop">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="update_mode"/>
+                        </group>
+                        <group>
+                            <field name="product_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                        </group>
+                    </group>
+                    <group string="Update Results" col="1" invisible="not products_updated">
+                        <field name="products_updated" readonly="1"/>
+                        <field name="price_changes" readonly="1"/>
+                        <field name="errors" readonly="1"/>
+                        <field name="log_message" widget="text" readonly="1" nolabel="1"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_update" string="Update" type="object" class="btn-primary"/>
+                    <button string="Close" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_amin_petshop_update_wizard" model="ir.actions.act_window">
+        <field name="name">Update Products from Amin Petshop</field>
+        <field name="res_model">amin.petshop.update.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_amin_petshop_update"
+              name="Update Products"
+              parent="sale.sale_menu_root"
+              action="action_amin_petshop_update_wizard"
+              sequence="100"/>
+</odoo>

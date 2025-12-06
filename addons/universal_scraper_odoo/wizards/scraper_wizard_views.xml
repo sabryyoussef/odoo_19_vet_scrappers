@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Scraper Wizard Form View -->
+    <record id="view_scraper_wizard_form" model="ir.ui.view">
+        <field name="name">scraper.wizard.form</field>
+        <field name="model">scraper.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Quick Scrape">
+                <sheet>
+                    <div class="alert alert-info" role="alert">
+                        <strong>🚀 Quick Scrape:</strong> Quickly scrape a website without creating a full configuration.
+                        Perfect for one-time scraping or testing.
+                    </div>
+                    
+                    <group>
+                        <group string="Target Website">
+                            <field name="url" widget="url" placeholder="https://example.com/collections/all"/>
+                            <field name="platform_type"/>
+                        </group>
+                        <group string="Scraping Options">
+                            <field name="max_pages"/>
+                            <field name="fetch_details"/>
+                            <field name="data_source_id" options="{'no_create': True}"/>
+                        </group>
+                    </group>
+                    
+                    <group>
+                        <group string="Save Configuration">
+                            <field name="save_config"/>
+                            <field name="config_name" invisible="not save_config" required="save_config"/>
+                        </group>
+                        <group>
+                            <!-- Empty group for layout -->
+                        </group>
+                    </group>
+                    
+                    <div class="alert alert-warning" role="alert">
+                        <strong>⚠️ Note:</strong>
+                        <ul>
+                            <li><strong>Max Pages 1:</strong> Fast, good for testing</li>
+                            <li><strong>Fetch Details:</strong> Slower but more accurate (recommended for final scraping)</li>
+                            <li><strong>Save Config:</strong> Reuse these settings later or schedule automatic scraping</li>
+                        </ul>
+                    </div>
+                </sheet>
+                <footer>
+                    <button name="action_run_scraper" string="Run Scraper" type="object" class="btn-primary" icon="fa-play"/>
+                    <button string="Cancel" special="cancel" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_scraper_wizard" model="ir.actions.act_window">
+        <field name="name">Quick Scrape</field>
+        <field name="res_model">scraper.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

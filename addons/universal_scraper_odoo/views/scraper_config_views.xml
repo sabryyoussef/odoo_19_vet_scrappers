@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Scraper Configuration List View -->
+    <record id="view_scraper_config_list" model="ir.ui.view">
+        <field name="name">scraper.config.list</field>
+        <field name="model">scraper.config</field>
+        <field name="arch" type="xml">
+            <list string="Scraper Configurations">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="url" widget="url"/>
+                <field name="platform_type"/>
+                <field name="data_source_id"/>
+                <field name="last_run_date"/>
+                <field name="last_run_status" decoration-success="last_run_status == 'success'"
+                                               decoration-danger="last_run_status == 'failed'"
+                                               decoration-warning="last_run_status == 'partial'"/>
+                <field name="draft_count"/>
+                <field name="total_products_scraped"/>
+                <field name="enable_cron" widget="boolean_toggle"/>
+                <field name="active" widget="boolean_toggle"/>
+                <button name="action_run_scraper" type="object" icon="fa-play" string="Run Now" class="btn-primary"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Scraper Configuration Form View -->
+    <record id="view_scraper_config_form" model="ir.ui.view">
+        <field name="name">scraper.config.form</field>
+        <field name="model">scraper.config</field>
+        <field name="arch" type="xml">
+            <form string="Scraper Configuration">
+                <header>
+                    <button name="action_run_scraper" string="Run Scraper Now" type="object" class="oe_highlight" icon="fa-play"/>
+                    <field name="last_run_status" widget="statusbar" statusbar_visible="success,partial,failed"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_drafts" type="object" class="oe_stat_button" icon="fa-file-text-o">
+                            <field name="draft_count" widget="statinfo" string="Drafts"/>
+                        </button>
+                        <button name="action_view_jobs" type="object" class="oe_stat_button" icon="fa-history">
+                            <field name="total_runs" widget="statinfo" string="Jobs"/>
+                        </button>
+                    </div>
+                    
+                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
+                    
+                    <div class="oe_title">
+                        <label for="name" string="Configuration Name"/>
+                        <h1>
+                            <field name="name" placeholder="e.g., Vetution Product Scraper"/>
+                        </h1>
+                    </div>
+                    
+                    <group>
+                        <group string="Basic Settings">
+                            <field name="active" invisible="1"/>
+                            <field name="sequence"/>
+                            <field name="url" widget="url" placeholder="https://example.com/collections/all"/>
+                            <field name="platform_type"/>
+                            <field name="data_source_id" options="{'no_create': True}"/>
+                        </group>
+                        <group string="Scraping Options">
+                            <field name="max_pages"/>
+                            <field name="fetch_details"/>
+                            <field name="headless"/>
+                            <field name="max_workers"/>
+                        </group>
+                    </group>
+                    
+                    <notebook>
+                        <page string="Authentication" name="authentication">
+                            <group>
+                                <group>
+                                    <field name="requires_login"/>
+                                    <field name="manual_login" invisible="not requires_login"/>
+                                </group>
+                                <group invisible="not requires_login or manual_login">
+                                    <field name="login_email" invisible="not requires_login or manual_login"/>
+                                    <field name="login_password" password="True" invisible="not requires_login or manual_login"/>
+                                </group>
+                            </group>
+                            <div class="alert alert-info" role="alert" invisible="not requires_login">
+                                <strong>Authentication Info:</strong>
+                                <ul>
+                                    <li><strong>Manual Login:</strong> Browser will open for you to login manually</li>
+                                    <li><strong>Automated Login:</strong> Provide email and password for automatic login</li>
+                                </ul>
+                            </div>
+                        </page>
+                        
+                        <page string="Scheduling" name="scheduling">
+                            <group>
+                                <group>
+                                    <field name="enable_cron"/>
+                                    <field name="cron_interval" invisible="not enable_cron"/>
+                                </group>
+                                <group>
+                                    <field name="last_run_date" readonly="1"/>
+                                    <field name="total_products_scraped" readonly="1"/>
+                                </group>
+                            </group>
+                            <div class="alert alert-warning" role="alert" invisible="not enable_cron">
+                                <strong>⚠️ Scheduled Scraping:</strong> This scraper will run automatically based on the selected frequency.
+                                Make sure the server has the required Python packages installed (playwright, beautifulsoup4, lxml).
+                            </div>
+                        </page>
+                        
+                        <page string="Help" name="help">
+                            <group>
+                                <div class="alert alert-info" role="alert">
+                                    <h4>🎯 How to Use This Scraper</h4>
+                                    <ol>
+                                        <li><strong>Configure:</strong> Set the target URL and platform type</li>
+                                        <li><strong>Link Data Source:</strong> Select the Unified Data Source for import</li>
+                                        <li><strong>Run:</strong> Click "Run Scraper Now" to start scraping</li>
+                                        <li><strong>Review:</strong> Check draft products and approve/reject them</li>
+                                        <li><strong>Import:</strong> Use the import wizard to send to Unified Scrapper</li>
+                                    </ol>
+                                    
+                                    <h4>🔧 Platform Support</h4>
+                                    <ul>
+                                        <li><strong>Shopify:</strong> Excellent support</li>
+                                        <li><strong>WooCommerce:</strong> Good support</li>
+                                        <li><strong>Magento:</strong> Good support</li>
+                                        <li><strong>Odoo E-commerce:</strong> Good support</li>
+                                        <li><strong>Amazon/eBay:</strong> Limited support</li>
+                                        <li><strong>Generic:</strong> Auto-detect platform</li>
+                                    </ul>
+                                    
+                                    <h4>⚡ Performance Tips</h4>
+                                    <ul>
+                                        <li><strong>Batch Size:</strong> 5-8 for most sites, 2-3 for slow sites</li>
+                                        <li><strong>Fetch Details:</strong> Slower but more accurate data</li>
+                                        <li><strong>Headless Mode:</strong> Faster, use visible mode for debugging</li>
+                                    </ul>
+                                </div>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <!-- Chatter commented out - causing view errors
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+                -->
+            </form>
+        </field>
+    </record>
+
+    <!-- Scraper Configuration Search View -->
+    <record id="view_scraper_config_search" model="ir.ui.view">
+        <field name="name">scraper.config.search</field>
+        <field name="model">scraper.config</field>
+        <field name="arch" type="xml">
+            <search string="Scraper Configurations">
+                <field name="name"/>
+                <field name="url"/>
+                <field name="platform_type"/>
+                <field name="data_source_id"/>
+                <separator/>
+                <filter name="active" string="Active" domain="[('active', '=', True)]"/>
+                <filter name="inactive" string="Archived" domain="[('active', '=', False)]"/>
+                <separator/>
+                <filter name="scheduled" string="Scheduled" domain="[('enable_cron', '=', True)]"/>
+                <separator/>
+                <filter name="success" string="Last Run: Success" domain="[('last_run_status', '=', 'success')]"/>
+                <filter name="failed" string="Last Run: Failed" domain="[('last_run_status', '=', 'failed')]"/>
+                <group name="groupby">
+                    <filter name="group_platform" string="Platform" context="{'group_by': 'platform_type'}"/>
+                    <filter name="group_source" string="Data Source" context="{'group_by': 'data_source_id'}"/>
+                    <filter name="group_status" string="Status" context="{'group_by': 'last_run_status'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_scraper_config" model="ir.actions.act_window">
+        <field name="name">Scraper Configurations</field>
+        <field name="res_model">scraper.config</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_active': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first scraper configuration
+            </p>
+            <p>
+                Configure a web scraper to automatically extract product data from e-commerce websites.
+            </p>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Sample Scraper Configurations for Testing -->
+    
+    <!-- Amin Petshop - Offers & Sales Category -->
+    <record id="scraper_config_amin_offers" model="scraper.config">
+        <field name="name">Amin Petshop - Offers &amp; Sales</field>
+        <field name="url">https://aminpetshop.com/collections/end-of-year-sale</field>
+        <field name="platform_type">shopify</field>
+        <field name="active" eval="True"/>
+        <field name="max_pages">5</field>
+        <field name="fetch_details" eval="True"/>
+        <field name="headless" eval="True"/>
+        <field name="max_workers">5</field>
+        <field name="data_source_id" ref="unified_scrapper.data_source_amin_petshop"/>
+    </record>
+    
+    <!-- Amin Petshop - Adult Dog Dry Food Category -->
+    <record id="scraper_config_amin_adult_dog" model="scraper.config">
+        <field name="name">Amin Petshop - Adult Dog Dry Food</field>
+        <field name="url">https://aminpetshop.com/collections/adult-dog-dry-food</field>
+        <field name="platform_type">shopify</field>
+        <field name="active" eval="True"/>
+        <field name="max_pages">10</field>
+        <field name="fetch_details" eval="True"/>
+        <field name="headless" eval="True"/>
+        <field name="max_workers">5</field>
+        <field name="data_source_id" ref="unified_scrapper.data_source_amin_petshop"/>
+    </record>
+    
+    <!-- Amin Petshop - Puppy Dry Food Category -->
+    <record id="scraper_config_amin_puppy" model="scraper.config">
+        <field name="name">Amin Petshop - Puppy Dry Food</field>
+        <field name="url">https://aminpetshop.com/collections/puppy-dry-food</field>
+        <field name="platform_type">shopify</field>
+        <field name="active" eval="True"/>
+        <field name="max_pages">5</field>
+        <field name="fetch_details" eval="True"/>
+        <field name="headless" eval="True"/>
+        <field name="max_workers">5</field>
+        <field name="data_source_id" ref="unified_scrapper.data_source_amin_petshop"/>
+    </record>
+    
+    <!-- Amin Petshop - Dog Treats Category -->
+    <record id="scraper_config_amin_treats" model="scraper.config">
+        <field name="name">Amin Petshop - Dog Treats</field>
+        <field name="url">https://aminpetshop.com/collections/dog-treats</field>
+        <field name="platform_type">shopify</field>
+        <field name="active" eval="True"/>
+        <field name="max_pages">5</field>
+        <field name="fetch_details" eval="True"/>
+        <field name="headless" eval="True"/>
+        <field name="max_workers">5</field>
+        <field name="data_source_id" ref="unified_scrapper.data_source_amin_petshop"/>
+    </record>
+    
+    <!-- Amin Petshop - Dog Toys Category -->
+    <record id="scraper_config_amin_toys" model="scraper.config">
+        <field name="name">Amin Petshop - Dog Toys</field>
+        <field name="url">https://aminpetshop.com/collections/dog-toys</field>
+        <field name="platform_type">shopify</field>
+        <field name="active" eval="True"/>
+        <field name="max_pages">5</field>
+        <field name="fetch_details" eval="True"/>
+        <field name="headless" eval="True"/>
+        <field name="max_workers">5</field>
+        <field name="data_source_id" ref="unified_scrapper.data_source_amin_petshop"/>
+    </record>
+    
+    <!-- Vetution - All Products (Example) -->
+    <record id="scraper_config_vetution_all" model="scraper.config">
+        <field name="name">Vetution - All Products</field>
+        <field name="url">https://vetution.com/products</field>
+        <field name="platform_type">generic</field>
+        <field name="active" eval="False"/>
+        <field name="max_pages">10</field>
+        <field name="fetch_details" eval="True"/>
+        <field name="headless" eval="True"/>
+        <field name="max_workers">3</field>
+        <field name="requires_login" eval="True"/>
+        <field name="data_source_id" ref="unified_scrapper.data_source_vetution"/>
+    </record>
+</odoo>
